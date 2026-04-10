@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title><br>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<!-- MAIN SERVICES -->
+<main>
+    <h1>Our Services</h1> 
+    <section class="services">
+    
+        <!-- Sub-services -->
+        <div class="service-box">
+    <img src="AadhiNandhi.jpeg" alt="Aadhi Nandhi Logo" class="service-logo">
+    <h3>Aadhi Nandhi Co-op Credit Society</h3>
+    <p>Financial services and credit solutions under Aadhi Nandhi Co-op Society.</p>
+         </div>
+
+
+      <div class="service-box">
+    <img src="logo4.png" alt="Shubhchintan Logo" class="service-logo">
+    <h3><li><a href="shubhchinthan.html">SHUBHCHINTAN Chits Pvt Ltd</a></li></h3>
+    <p>Chit fund schemes and saving plans for secure investments.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="mutualfund.png" alt="mutual fund Logo" class="service-logo">
+            <h3>Mutual Fund</h3>
+            <p>Investment in top-performing mutual fund schemes for growth and security.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="insurance.png" alt="insurance Logo" class="service-logo">
+            <h3>Life Insurance</h3>
+            <p>Protect your family with reliable life insurance plans and coverage.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="generalinsurance.png" alt="generalinsurance logo" class="service-logo">
+            <h3>General Insurance</h3>
+            <p>Coverage for property, vehicles, and other assets for peace of mind.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="healthinsurance.png" alt="Health Insurance Logo" class="service-logo">
+            <h3>Health Insurance</h3>
+            <p>Comprehensive health insurance plans for individuals and families.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="grouptermlife.png" alt="Group Term Life Logo" class="service-logo">
+            <h3>Group Term Life</h3>
+            <p>Term life insurance coverage for organizations and employee groups.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="groupmediclaimplan.png" alt="Group Medical Claim Plan Logo" class="service-logo">
+            <h3>Group Mediclaim Plan</h3>
+            <p>Medical insurance coverage for groups with easy claim process.</p>
+        </div>
+
+        <div class="service-box">
+            <img src="travelinsurance.png" alt="Travel Insurance Logo" class="service-logo">
+            <h3>Travel Insurance</h3>
+            <p>Secure your travel plans with medical and trip coverage for peace of mind.</p>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <p>© 2026 Cooperative Society</p>
+        <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<!-- SERVICES ANIMATION JS -->
+<script>
+const serviceBoxes = document.querySelectorAll('.service-box');
+window.addEventListener('scroll', () => {
+    let triggerBottom = window.innerHeight / 5 * 4;
+    serviceBoxes.forEach(box => {
+        const boxTop = box.getBoundingClientRect().top;
+        if(boxTop < triggerBottom) {
+            box.classList.add('visible');
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>
