@@ -6,7 +6,7 @@
     <title>Secure Fund Group</title>
 
     <!-- CSS file -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -19,18 +19,41 @@
     </div>
     <nav>
         <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/services.html">Services</a>
         
-        <a href="contact.html">Contact</a>
+        <a href="pages/contact.html">Contact</a>
     </nav>
 </header>
 
+
+
+
 <!-- HERO SECTION -->
 <section class="hero">
-    <h1>NAMO Financial and Insurance Advisory Service</h1>
-    <p>Adding a better value</p>
-    <a href="services.html" class="btn">Explore Services</a>
+    <h1 style="color: white">NAMO Financial and Insurance Advisory Service</h1>
+    <!-- IMAGE SLIDER -->
+<section class="slider">
+
+    <div class="slides">
+        <img src="https://plus.unsplash.com/premium_photo-1661776260388-f5d1b14ce8a2?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide active" alt="Family protected by insurance">
+        <img src="https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide" alt="Insurance planning discussion">
+        <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide" alt="Happy clients meeting advisor">
+        <img src="https://images.unsplash.com/photo-1637763723578-79a4ca9225f7?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide" alt="Life insurance concept">
+        <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide" alt="Family financial protection">
+    </div>
+    <button class="slider-btn prev" aria-label="Previous slide">&#10094;</button>
+    <button class="slider-btn next" aria-label="Next slide">&#10095;</button>
+    <div class="slider-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+        <span class="dot" data-slide="4"></span>
+    </div>
+</section>
+    <p><h3>Adding a better value</h3></p>
+    <a href="pages/services.html" class="btn">Explore Services</a>
 </section>
 
 
@@ -46,6 +69,60 @@
         </div>
     </div>
 </footer>
+
+<script>
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    let currentSlide = 0;
+    let autoSlide;
+
+    function showSlide(index) {
+        slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("active", slideIndex === index);
+        });
+
+        dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle("active", dotIndex === index);
+        });
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+    }
+
+    function prevSlide() {
+        showSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoSlide() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(nextSlide, 3000);
+    }
+
+    nextBtn.addEventListener("click", () => {
+        nextSlide();
+        startAutoSlide();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        prevSlide();
+        startAutoSlide();
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            showSlide(index);
+            startAutoSlide();
+        });
+    });
+
+    showSlide(currentSlide);
+    startAutoSlide();
+</script>
 
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services</title><br>
-    <link rel="stylesheet" href="style.css">
+    <title>Our Services</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -13,7 +13,7 @@
 <!-- HEADER -->
 <header>
     <nav>
-        <a href="index.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
@@ -27,58 +27,68 @@
     
         <!-- Sub-services -->
         <div class="service-box">
-    <img src="AadhiNandhi.jpeg" alt="Aadhi Nandhi Logo" class="service-logo">
+    <img src="../assets/images/AadhiNandhi.jpeg" alt="Aadhi Nandhi Logo" class="service-logo">
     <h3>Aadhi Nandhi Co-op Credit Society</h3>
     <p>Financial services and credit solutions under Aadhi Nandhi Co-op Society.</p>
+    <button class="btn">View</button>
          </div>
 
 
       <div class="service-box">
-    <img src="logo4.png" alt="Shubhchintan Logo" class="service-logo">
-    <h3><li><a href="shubhchinthan.html">SHUBHCHINTAN Chits Pvt Ltd</a></li></h3>
+    <img src="../assets/images/logo4.png" alt="Shubhchintan Logo" class="service-logo">
+    <h3>SHUBHCHINTAN Chits Pvt Ltd</h3>
     <p>Chit fund schemes and saving plans for secure investments.</p>
+    <a href="shubhchinthan.html"><button class="btn">View</button></a>
         </div>
 
         <div class="service-box">
-            <img src="mutualfund.png" alt="mutual fund Logo" class="service-logo">
+            <img src="../assets/images/mutualfund.png" alt="mutual fund Logo" class="service-logo">
             <h3>Mutual Fund</h3>
             <p>Investment in top-performing mutual fund schemes for growth and security.</p>
+            <button class="btn">View</button>
         </div>
+        
 
         <div class="service-box">
-            <img src="insurance.png" alt="insurance Logo" class="service-logo">
+            <img src="../assets/images/insurance.png" alt="insurance Logo" class="service-logo">
             <h3>Life Insurance</h3>
             <p>Protect your family with reliable life insurance plans and coverage.</p>
+            <button class="btn">View</button>
         </div>
 
         <div class="service-box">
-            <img src="generalinsurance.png" alt="generalinsurance logo" class="service-logo">
+            <img src="../assets/images/generalinsurance.png" alt="generalinsurance logo" class="service-logo">
             <h3>General Insurance</h3>
             <p>Coverage for property, vehicles, and other assets for peace of mind.</p>
+            <button class="btn">View</button>
         </div>
 
         <div class="service-box">
-            <img src="healthinsurance.png" alt="Health Insurance Logo" class="service-logo">
+            <img src="../assets/images/healthinsurance.png" alt="Health Insurance Logo" class="service-logo">
             <h3>Health Insurance</h3>
             <p>Comprehensive health insurance plans for individuals and families.</p>
+            <button class="btn">View</button>
         </div>
 
         <div class="service-box">
-            <img src="grouptermlife.png" alt="Group Term Life Logo" class="service-logo">
+            <img src="../assets/images/grouptermlife.png" alt="Group Term Life Logo" class="service-logo">
             <h3>Group Term Life</h3>
             <p>Term life insurance coverage for organizations and employee groups.</p>
+            <button class="btn">View</button>
         </div>
 
         <div class="service-box">
-            <img src="groupmediclaimplan.png" alt="Group Medical Claim Plan Logo" class="service-logo">
+            <img src="../assets/images/groupmediclaimplan.png" alt="Group Medical Claim Plan Logo" class="service-logo">
             <h3>Group Mediclaim Plan</h3>
             <p>Medical insurance coverage for groups with easy claim process.</p>
+            <button class="btn">View</button>
         </div>
 
         <div class="service-box">
-            <img src="travelinsurance.png" alt="Travel Insurance Logo" class="service-logo">
+            <img src="../assets/images/travelinsurance.png" alt="Travel Insurance Logo" class="service-logo">
             <h3>Travel Insurance</h3>
             <p>Secure your travel plans with medical and trip coverage for peace of mind.</p>
+            <button class="btn">View</button>
         </div>
     </section>
 </main>
@@ -99,15 +109,19 @@
 <!-- SERVICES ANIMATION JS -->
 <script>
 const serviceBoxes = document.querySelectorAll('.service-box');
-window.addEventListener('scroll', () => {
-    let triggerBottom = window.innerHeight / 5 * 4;
+
+function revealServiceBoxes() {
+    const triggerBottom = window.innerHeight / 5 * 4;
     serviceBoxes.forEach(box => {
         const boxTop = box.getBoundingClientRect().top;
-        if(boxTop < triggerBottom) {
+        if (boxTop < triggerBottom) {
             box.classList.add('visible');
         }
     });
-});
+}
+
+window.addEventListener('load', revealServiceBoxes);
+window.addEventListener('scroll', revealServiceBoxes);
 
 </script>
 
