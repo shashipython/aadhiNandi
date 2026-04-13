@@ -5,98 +5,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="services-page">
 
-<!-- HEADER -->
-<header>
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+<header class="services-header">
+    <div class="services-header-inner">
+        <div class="services-brand">
+            <span class="services-brand-mark">NAMO</span>
+            <div>
+                <p class="services-brand-label">Financial Protection and Growth</p>
+                <h2>Our Services</h2>
+            </div>
+        </div>
+        <nav class="services-nav">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
 
-<!-- MAIN SERVICES -->
-<main>
-    <h1>Our Services</h1> 
-    <section class="services">
-    
-        <!-- Sub-services -->
-        <div class="service-box">
-    <img src="../assets/images/AadhiNandhi.jpeg" alt="Aadhi Nandhi Logo" class="service-logo">
-    <h3>Aadhi Nandhi Co-op Credit Society</h3>
-    <p>Financial services and credit solutions under Aadhi Nandhi Co-op Society.</p>
-    <button class="btn">View</button>
-         </div>
+<main class="services-main">
+    <section class="services-hero">
+        <div class="services-hero-copy">
+            <span class="services-eyebrow">Smart Financial Support</span>
+            <h1>Solutions Designed for Savings, Security, and Long-Term Confidence</h1>
+            <p>
+                Explore financial and insurance services created to support families, professionals,
+                groups, and growing organizations. From savings-led products to protection-focused plans,
+                each service is designed to help you move ahead with more clarity and confidence.
+            </p>
+            <div class="services-hero-actions">
+                <a href="#services-grid" class="btn">Explore Services</a>
+                <a href="contact.html" class="services-outline-btn">Talk to Us</a>
+            </div>
+        </div>
+        <div class="services-hero-panel">
+            <div class="services-hero-card">
+                <strong>What You Can Find Here</strong>
+                <ul>
+                    <li>Savings and chit-based growth options</li>
+                    <li>Insurance plans for life, health, and assets</li>
+                    <li>Group protection products for organizations</li>
+                    <li>Investment and future-planning support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
+    <section class="services-intro">
+        <div class="services-intro-card">
+            <h2>Services Built Around Real Financial Needs</h2>
+            <p>
+                Whether you are planning for family security, business continuity, emergency support,
+                or disciplined wealth building, our services are structured to make financial decisions
+                feel simpler and more practical.
+            </p>
+        </div>
+        <div class="services-highlight-grid">
+            <div class="services-highlight-item">
+                <strong>Protection</strong>
+                <span>Insurance solutions that support life, health, and asset security.</span>
+            </div>
+            <div class="services-highlight-item">
+                <strong>Growth</strong>
+                <span>Investment and savings options designed for long-term value creation.</span>
+            </div>
+            <div class="services-highlight-item">
+                <strong>Support</strong>
+                <span>Structured services for individuals, families, and organizations.</span>
+            </div>
+        </div>
+    </section>
 
-      <div class="service-box">
-    <img src="../assets/images/logo4.png" alt="Shubhchintan Logo" class="service-logo">
-    <h3>SHUBHCHINTAN Chits Pvt Ltd</h3>
-    <p>Chit fund schemes and saving plans for secure investments.</p>
-    <a href="shubhchinthan.html"><button class="btn">View</button></a>
+    <section id="services-grid" class="services-showcase">
+        <div class="services-section-heading">
+            <span class="services-eyebrow">Our Offerings</span>
+            <h2>Choose the Service That Matches Your Goal</h2>
+            <p>Each card below focuses on a different way to save better, protect more, and plan ahead with confidence.</p>
         </div>
 
-        <div class="service-box">
-            <img src="../assets/images/mutualfund.png" alt="mutual fund Logo" class="service-logo">
-            <h3>Mutual Fund</h3>
-            <p>Investment in top-performing mutual fund schemes for growth and security.</p>
-            <button class="btn">View</button>
-        </div>
-        
+        <section class="services-grid">
+            <article class="services-card">
+                <img src="../assets/images/AadhiNandhi.jpeg" alt="Aadhi Nandhi Logo" class="services-card-logo">
+                <span class="services-card-tag">Co-operative Credit</span>
+                <h3>Aadhi Nandhi Co-op Credit Society</h3>
+                <p>Credit and financial support solutions focused on accessibility, trust, and community-oriented service.</p>
+                <a href="contact.html" class="services-card-link">Enquire Now</a>
+            </article>
 
-        <div class="service-box">
-            <img src="../assets/images/insurance.png" alt="insurance Logo" class="service-logo">
-            <h3>Life Insurance</h3>
-            <p>Protect your family with reliable life insurance plans and coverage.</p>
-            <a href="life-insurance.html"><button class="btn">View</button></a>
-        </div>
+            <article class="services-card">
+                <img src="../assets/images/logo4.png" alt="Shubhchintan Logo" class="services-card-logo">
+                <span class="services-card-tag">Chit and Savings</span>
+                <h3>Shubhchintan Chits Pvt. Ltd.</h3>
+                <p>Structured chit plans that combine disciplined saving with timely financial support when you need it most.</p>
+                <a href="shubhchinthan.html" class="services-card-link">View Service</a>
+            </article>
 
-        <div class="service-box">
-            <img src="../assets/images/generalinsurance.png" alt="generalinsurance logo" class="service-logo">
-            <h3>General Insurance</h3>
-            <p>Coverage for property, vehicles, and other assets for peace of mind.</p>
-            <a href="general-insurance.html"><button class="btn">View</button></a>
-        </div>
+            <article class="services-card">
+                <img src="../assets/images/mutualfund.png" alt="Mutual Fund Logo" class="services-card-logo">
+                <span class="services-card-tag">Investment Growth</span>
+                <h3>Mutual Fund</h3>
+                <p>Investment-oriented solutions for individuals who want professional fund management and long-term wealth creation.</p>
+                <a href="contact.html" class="services-card-link">Explore Options</a>
+            </article>
 
-        <div class="service-box">
-            <img src="../assets/images/healthinsurance.png" alt="Health Insurance Logo" class="service-logo">
-            <h3>Health Insurance</h3>
-            <p>Comprehensive health insurance plans for individuals and families.</p>
-            <button class="btn">View</button>
-        </div>
+            <article class="services-card">
+                <img src="../assets/images/insurance.png" alt="Life Insurance Logo" class="services-card-logo">
+                <span class="services-card-tag">Family Protection</span>
+                <h3>Life Insurance</h3>
+                <p>Reliable life cover plans that protect your family’s future goals, income stability, and peace of mind.</p>
+                <a href="life-insurance.html" class="services-card-link">View Service</a>
+            </article>
 
-        <div class="service-box">
-            <img src="../assets/images/grouptermlife.png" alt="Group Term Life Logo" class="service-logo">
-            <h3>Group Term Life</h3>
-            <p>Term life insurance coverage for organizations and employee groups.</p>
-            <a href="group-term-insurance.html"><button class="btn">View</button></a>
-        </div>
+            <article class="services-card">
+                <img src="../assets/images/generalinsurance.png" alt="General Insurance Logo" class="services-card-logo">
+                <span class="services-card-tag">Asset Security</span>
+                <h3>General Insurance</h3>
+                <p>Coverage for property, vehicles, travel, and business risks to reduce the impact of unexpected losses.</p>
+                <a href="general-insurance.html" class="services-card-link">View Service</a>
+            </article>
 
-        <div class="service-box">
-            <img src="../assets/images/groupmediclaimplan.png" alt="Group Medical Claim Plan Logo" class="service-logo">
-            <h3>Group Mediclaim Plan</h3>
-            <p>Medical insurance coverage for groups with easy claim process.</p>
-            <a href="group-mediclaim.html"><button class="btn">View</button></a>
-        </div>
+            <article class="services-card">
+                <img src="../assets/images/healthinsurance.png" alt="Health Insurance Logo" class="services-card-logo">
+                <span class="services-card-tag">Medical Support</span>
+                <h3>Health Insurance</h3>
+                <p>Health-focused plans designed to help individuals and families manage hospitalization and treatment costs.</p>
+                <a href="contact.html" class="services-card-link">Enquire Now</a>
+            </article>
 
-        <div class="service-box">
-            <img src="../assets/images/travelinsurance.png" alt="Travel Insurance Logo" class="service-logo">
-            <h3>Travel Insurance</h3>
-            <p>Secure your travel plans with medical and trip coverage for peace of mind.</p>
-            <button class="btn">View</button>
-        </div>
+            <article class="services-card">
+                <img src="../assets/images/grouptermlife.png" alt="Group Term Life Logo" class="services-card-logo">
+                <span class="services-card-tag">Group Protection</span>
+                <h3>Group Term Life</h3>
+                <p>Life cover solutions for organizations that want to create stronger employee and member benefit programs.</p>
+                <a href="group-term-insurance.html" class="services-card-link">View Service</a>
+            </article>
+
+            <article class="services-card">
+                <img src="../assets/images/groupmediclaimplan.png" alt="Group Mediclaim Plan Logo" class="services-card-logo">
+                <span class="services-card-tag">Group Health Cover</span>
+                <h3>Group Mediclaim Plan</h3>
+                <p>Health coverage for teams and institutions that want structured medical protection under one plan.</p>
+                <a href="group-mediclaim.html" class="services-card-link">View Service</a>
+            </article>
+
+            <article class="services-card">
+                <img src="../assets/images/travelinsurance.png" alt="Travel Insurance Logo" class="services-card-logo">
+                <span class="services-card-tag">Travel Safety</span>
+                <h3>Travel Insurance</h3>
+                <p>Travel protection for medical emergencies, trip disruptions, and unexpected travel-related risks.</p>
+                <a href="contact.html" class="services-card-link">Enquire Now</a>
+            </article>
+        </section>
     </section>
 </main>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-container">
-        <p>© 2026 Cooperative Society</p>
+        <p>&copy; 2026 Cooperative Society</p>
         <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
         <div class="social-icons">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -106,23 +175,21 @@
     </div>
 </footer>
 
-<!-- SERVICES ANIMATION JS -->
 <script>
-const serviceBoxes = document.querySelectorAll('.service-box');
+const serviceCards = document.querySelectorAll('.services-card');
 
-function revealServiceBoxes() {
-    const triggerBottom = window.innerHeight / 5 * 4;
-    serviceBoxes.forEach(box => {
-        const boxTop = box.getBoundingClientRect().top;
-        if (boxTop < triggerBottom) {
-            box.classList.add('visible');
+function revealServiceCards() {
+    const triggerBottom = window.innerHeight * 0.85;
+    serviceCards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) {
+            card.classList.add('visible');
         }
     });
 }
 
-window.addEventListener('load', revealServiceBoxes);
-window.addEventListener('scroll', revealServiceBoxes);
-
+window.addEventListener('load', revealServiceCards);
+window.addEventListener('scroll', revealServiceCards);
 </script>
 
 </body>
