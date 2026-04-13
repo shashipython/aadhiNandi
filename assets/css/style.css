@@ -50,19 +50,19 @@ nav a:hover {
 }
 
 /* HERO SECTION (index.html only) */
-.hero {
+.index-hero {
     background: linear-gradient(to right, #004080, #0073e6);
     color: white;
     text-align: center;
     padding: 100px 20px;
 }
 
-.hero h1 {
+.index-hero h1 {
     font-size: 40px;
     margin-bottom: 10px;
 }
 
-.hero p {
+.index-hero p {
     font-size: 18px;
     margin-bottom: 20px;
 }
@@ -80,7 +80,7 @@ nav a:hover {
     background: orange;
 }
 
-/* SERVICES SECTION (index.html only) */
+/* SERVICES SECTION (Services.html only) */
 .services {
     text-align: center;
     padding: 50px 20px;
@@ -354,27 +354,28 @@ main {
 }
 
 /* HERO SECTION */
-.hero {
+.shubhchintan-hero {
     text-align: center;
-    padding: 100px 20px;
-    background: #004080;
-    color: white;
+    padding: 10px 20px;
+    background: #77ade4;
+    
 }
 
-.hero h1 {
+.shubhchintan-hero h1 {
     font-size: 3rem;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
 }
 
-.hero p {
+.shubhchintan-hero p {
     font-size: 1.2rem;
-    margin-bottom: 30px;
+    margin-bottom: 3px;
 }
 
-.hero .btn {
+.index-hero .index-btn {
     background: #ffcc00;
     color: #000;
     padding: 10px 30px;
+    justify-content: center;
     text-decoration: none;
     border-radius: 5px;
 }
@@ -499,90 +500,7 @@ footer .social-icons a {
     }
 }
 
-/* SHUBHCHINTAN PAGE */
-.shubhchintan-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 0 20px 40px;
-    max-width: 900px;
-    margin: auto;
-    background: #f4f4f4;
-    border-radius: 10px;
-}
 
-/* .shubhchintan-section .service-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 800px;
-} */
-
-.shubhchintan-section .service-logo {
-    max-width: 200px;
-    height: auto;
-    margin-bottom: 20px;
-    object-fit: contain;
-}
-
-.shubhchintan-section h1,
-.shubhchintan-section h2 {
-    color: #004080;
-    margin-bottom: 15px;
-}
-
-.shubhchintan-section p,
-.shubhchintan-section li {
-    text-align: left;
-    line-height: 1.8;
-    /* margin-bottom: 10px; */
-}
-
-.shubhchintan-section .container ul {
-    padding-left: 0%;
-}
-
-.shubhchintan-table-container {
-    width: 100%;
-    max-width: 900px;
-    overflow-x: auto;
-    margin-top: 20px;
-}
-
-.shubhchintan-section .chit-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 500px;
-    margin-top: 10px;
-}
-
-.shubhchintan-section .chit-table th,
-.shubhchintan-section .chit-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-
-.shubhchintan-section .chit-table th {
-    background: #004080;
-    color: white;
-}
-
-.shubhchintan-section .contact-info {
-    margin-top: 30px;
-    padding: 20px;
-    background: #e6e6e6;
-    border-radius: 8px;
-    max-width: 800px;
-    text-align: center;
-}
-
-.shubhchintan-section .container li {
-    padding-left: 0%;
-    text-align: left;
-}
 /* Main services section */
 .services {
     max-width: 1200px; /* container width */
@@ -653,6 +571,371 @@ h1 {
     margin: 0 auto;     /* ensures proper spacing */
     font-size: 36px;    /* optional: make it bigger */
     color: #333;        /* optional: color */
+}
+
+/* SHUBHCHINTAN REDESIGN */
+body.shubh-page {
+    background:
+        radial-gradient(circle at top right, rgba(255, 206, 86, 0.28), transparent 28%),
+        linear-gradient(180deg, #f4f8ff 0%, #eef4ff 48%, #f9fbff 100%);
+}
+
+.shubh-main {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 48px;
+}
+
+.shubh-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 14px 24px;
+    background: rgba(5, 52, 110, 0.94);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(5, 52, 110, 0.18);
+}
+
+.shubh-header-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.shubh-header-nav a {
+    margin-left: 18px;
+}
+
+.shubh-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+    gap: 28px;
+    align-items: stretch;
+    padding: 38px;
+    border-radius: 28px;
+    background:
+        linear-gradient(135deg, rgba(4, 64, 128, 0.96), rgba(12, 102, 171, 0.92)),
+        linear-gradient(135deg, #0d4d8f, #1c6cb5);
+    color: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+
+.shubh-hero::after {
+    content: "";
+    position: absolute;
+    inset: auto -80px -90px auto;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255, 214, 10, 0.18);
+}
+
+.shubh-hero-copy,
+.shubh-hero-card {
+    position: relative;
+    z-index: 1;
+}
+
+.shubh-eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffe082;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.shubh-hero h1 {
+    margin: 0 0 12px;
+    text-align: left;
+    font-size: clamp(2.2rem, 4vw, 3.7rem);
+    line-height: 1.05;
+    color: #ffffff;
+}
+
+.shubh-hero-tagline {
+    margin-bottom: 14px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffe082;
+}
+
+.shubh-hero-text {
+    max-width: 640px;
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.shubh-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.shubh-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.shubh-secondary-btn:hover {
+    background: #ffffff;
+    color: #0d4d8f;
+    border-color: #ffffff;
+}
+
+.shubh-hero-card {
+    padding: 26px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.shubh-hero-logo {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto 18px;
+}
+
+.shubh-hero-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shubh-hero-points li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    line-height: 1.7;
+}
+
+.shubh-hero-points i {
+    margin-top: 4px;
+    color: #ffd54f;
+}
+
+.shubh-overview,
+.shubh-feature-grid {
+    display: grid;
+    gap: 22px;
+    margin-top: 26px;
+}
+
+.shubh-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shubh-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shubh-info-card,
+.shubh-feature-card,
+.shubh-table-section,
+.shubh-contact-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(13, 77, 143, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(25, 71, 124, 0.08);
+}
+
+.shubh-info-card,
+.shubh-feature-card {
+    padding: 28px;
+}
+
+.shubh-card-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0d4d8f, #1f7bd1);
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.shubh-about-logo {
+    width: 84px;
+    height: auto;
+    display: block;
+    margin: 0 0 16px;
+    object-fit: contain;
+}
+
+.shubh-info-card h2,
+.shubh-feature-card h2,
+.shubh-section-heading h2 {
+    margin: 0 0 14px;
+    text-align: left;
+    color: #0d4d8f;
+    font-size: 1.45rem;
+}
+
+.shubh-info-card p,
+.shubh-feature-card li,
+.shubh-section-heading p,
+.shubh-contact-item p {
+    color: #304760;
+    line-height: 1.8;
+}
+
+.shubh-feature-card ul {
+    padding-left: 20px;
+}
+
+.shubh-highlight-band {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 26px;
+}
+
+.shubh-highlight-item {
+    padding: 22px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fff9e6, #fff1bf);
+    color: #6b4f00;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(190, 145, 0, 0.12);
+}
+
+.shubh-highlight-item strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+}
+
+.shubh-table-section,
+.shubh-contact-card {
+    margin-top: 26px;
+    padding: 30px;
+}
+
+.shubh-section-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.shubh-section-heading h2 {
+    text-align: center;
+}
+
+.shubh-section-heading p {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.shubhchintan-table-container {
+    overflow-x: auto;
+}
+
+.shubh-table-section .chit-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.shubh-table-section .chit-table th,
+.shubh-table-section .chit-table td {
+    padding: 14px 16px;
+    border: 1px solid #b9cde6;
+    text-align: center;
+}
+
+.shubh-table-section .chit-table th {
+    background: #0d4d8f;
+    color: #ffffff;
+}
+
+.shubh-table-section .chit-table tbody tr:nth-child(even) {
+    background: #f6f9ff;
+}
+
+.shubh-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.shubh-contact-item {
+    padding: 24px 18px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #f7fbff, #eef5ff);
+    text-align: center;
+}
+
+.shubh-contact-item i {
+    margin-bottom: 14px;
+    font-size: 1.35rem;
+    color: #0d4d8f;
+}
+
+@media (max-width: 900px) {
+    .shubh-hero,
+    .shubh-overview,
+    .shubh-feature-grid,
+    .shubh-highlight-band,
+    .shubh-contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shubh-main {
+        width: min(100% - 20px, 1120px);
+        padding-top: 18px;
+    }
+
+    .shubh-hero,
+    .shubh-table-section,
+    .shubh-contact-card {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 640px) {
+    .shubh-header {
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .shubh-header-nav a {
+        margin-left: 14px;
+    }
+
+    .shubh-hero h1 {
+        font-size: 2rem;
+    }
+
+    .shubh-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .shubh-table-section .chit-table {
+        min-width: 100%;
+    }
 }
 
 
