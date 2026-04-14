@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Update</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="client-update-page">
+<header>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<main class="client-update-main">
+    <section class="client-update-card">
+        <div class="client-update-heading">
+            <span class="client-update-badge">Client Management</span>
+            <h1>Update Client Details</h1>
+            <p>Submit the latest client information to the update API.</p>
+        </div>
+
+        <form id="clientUpdateForm" class="client-update-form">
+            <div class="client-update-grid">
+                <div class="client-update-field">
+                    <label for="name">Client Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter client name" required>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter last name" required>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="dob">DOB</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="mobile_number">Mobile Number</label>
+                    <input type="tel" id="mobile_number" name="mobile_number" placeholder="Enter mobile number" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                        <option value="Aadhi Nandhi co op credit society">Aadhi Nandhi co op credit society</option>
+                        <option value="Shubhchintan chits pvt ltd">Shubhchintan chits pvt ltd</option>
+                        <option value="Mutual fund">Mutual fund</option>
+                        <option value="Life Insurance">Life Insurance</option>
+                        <option value="Generall Insurance">Generall Insurance</option>
+                        <option value="Health insurance">Health insurance</option>
+                        <option value="Group term life">Group term life</option>
+                        <option value="Group mediclaim plan">Group mediclaim plan</option>
+                        <option value="Travel insurance">Travel insurance</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="client-update-actions">
+                <button type="submit" class="btn client-update-submit">Submit</button>
+                <button type="reset" class="client-update-reset">Reset</button>
+            </div>
+
+            <p id="formMessage" class="client-update-message" aria-live="polite"></p>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <p>© 2026 Secure Fund Group</p>
+        <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const clientUpdateForm = document.getElementById("clientUpdateForm");
+    const formMessage = document.getElementById("formMessage");
+
+    function setFormMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.className = "client-update-message";
+
+        if (type) {
+            formMessage.classList.add(type);
+        }
+    }
+
+    clientUpdateForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = clientUpdateForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+        setFormMessage("Submitting client details...", "info");
+
+        const payload = {
+            name: document.getElementById("name").value.trim(),
+            last_name: document.getElementById("last_name").value.trim(),
+            dob: document.getElementById("dob").value,
+            category: document.getElementById("category").value,
+            email: document.getElementById("email").value.trim(),
+            mobile_number: document.getElementById("mobile_number").value.trim()
+        };
+
+        try {
+            const response = await fetch(
+                "https://3vcm8ag0ll.execute-api.us-east-1.amazonaws.com/aadhi_update_client_api_deploy/aadhi_update_client_details",
+                {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                }
+            );
+
+            let responseData = null;
+            try {
+                responseData = await response.json();
+            } catch (jsonError) {
+                responseData = null;
+            }
+
+            if (!response.ok) {
+                const errorMessage = responseData && responseData.message
+                    ? responseData.message
+                    : "Unable to update client details. Please try again.";
+                throw new Error(errorMessage);
+            }
+
+            const successMessage = responseData && responseData.message
+                ? responseData.message
+                : "Client added sucussfull message";
+
+            setFormMessage(successMessage, "success");
+            clientUpdateForm.reset();
+        } catch (error) {
+            setFormMessage(error.message || "Something went wrong while updating the client.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit";
+        }
+    });
+
+    clientUpdateForm.addEventListener("reset", () => {
+        window.setTimeout(() => {
+            setFormMessage("", "");
+        }, 0);
+    });
+</script>
+</body>
+</html>
