@@ -79,6 +79,16 @@
     </section>
 </main>
 
+<button
+    type="button"
+    id="downloadClientDetailsButton"
+    class="client-download-button"
+    aria-label="Download client details in Excel format"
+>
+    <i class="fas fa-file-excel" aria-hidden="true"></i>
+    <span>Download Excel</span>
+</button>
+
 <footer>
     <div class="footer-container">
         <p>© 2026 Secure Fund Group</p>
@@ -94,6 +104,7 @@
 <script>
     const clientUpdateForm = document.getElementById("clientUpdateForm");
     const formMessage = document.getElementById("formMessage");
+    const downloadClientButton = document.getElementById("downloadClientDetailsButton");
 
     function setFormMessage(message, type) {
         formMessage.textContent = message;
@@ -104,7 +115,143 @@
         }
     }
 
-    clientUpdateForm.addEventListener("submit", async (event) => {
+    function flattenRecord(record, parentKey, output) {
+        const currentParentKey = parentKey || "";
+        const currentOutput = output || {};
+
+        Object.entries(record || {}).forEach(function ([key, value]) {
+            const nextKey = currentParentKey ? currentParentKey + "." + key : key;
+
+            if (Array.isArray(value)) {
+                currentOutput[nextKey] = value.map(function (item) {
+                    if (item && typeof item === "object") {
+                        return JSON.stringify(item);
+                    }
+
+                    return item == null ? "" : item;
+                }).join(", ");
+                return;
+            }
+
+            if (value && typeof value === "object") {
+                flattenRecord(value, nextKey, currentOutput);
+                return;
+            }
+
+            currentOutput[nextKey] = value == null ? "" : value;
+        });
+
+        return currentOutput;
+    }
+
+    function extractRows(responseData) {
+        if (Array.isArray(responseData)) {
+            return responseData;
+        }
+
+        if (responseData && typeof responseData === "object") {
+            const arrayValue = Object.values(responseData).find(function (value) {
+                return Array.isArray(value);
+            });
+
+            if (arrayValue) {
+                return arrayValue;
+            }
+
+            return [responseData];
+        }
+
+        return [];
+    }
+
+    function parseJsonSafely(value) {
+        if (typeof value !== "string") {
+            return value;
+        }
+
+        try {
+            return JSON.parse(value);
+        } catch (error) {
+            return value;
+        }
+    }
+
+    async function readApiResponse(response) {
+        const rawText = await response.text();
+        let parsedData = parseJsonSafely(rawText);
+
+        if (parsedData && typeof parsedData === "object" && Object.prototype.hasOwnProperty.call(parsedData, "body")) {
+            parsedData = parseJsonSafely(parsedData.body);
+        }
+
+        return {
+            parsedData: parsedData,
+            rawText: rawText
+        };
+    }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    function escapeCsv(value) {
+        const stringValue = String(value == null ? "" : value);
+        return '"' + stringValue.replace(/"/g, '""') + '"';
+    }
+
+    function downloadExcelFromRows(rows) {
+        if (!rows.length) {
+            throw new Error("No client details were returned by the API.");
+        }
+
+        const flattenedRows = rows.map(function (row) {
+            return flattenRecord(row);
+        });
+        const headers = Array.from(new Set(flattenedRows.flatMap(function (row) {
+            return Object.keys(row);
+        })));
+        const tableHeader = headers.map(function (header) {
+            return "<th>" + escapeHtml(header) + "</th>";
+        }).join("");
+        const tableBody = flattenedRows.map(function (row) {
+            const cells = headers.map(function (header) {
+                return "<td>" + escapeHtml(row[header] || "") + "</td>";
+            }).join("");
+            return "<tr>" + cells + "</tr>";
+        }).join("");
+
+        const csvLines = [];
+        csvLines.push(headers.map(function (header) {
+            return escapeCsv(header);
+        }).join(","));
+
+        flattenedRows.forEach(function (row) {
+            csvLines.push(headers.map(function (header) {
+                return escapeCsv(row[header]);
+            }).join(","));
+        });
+
+        const blob = new Blob(["\ufeff", csvLines.join("\r\n")], {
+            type: "text/csv;charset=utf-8;"
+        });
+        const downloadUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const dateStamp = new Date().toISOString().slice(0, 10);
+
+        link.href = downloadUrl;
+        link.download = "client-details-" + dateStamp + ".csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(downloadUrl);
+    }
+
+    clientUpdateForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const submitButton = clientUpdateForm.querySelector('button[type="submit"]');
@@ -158,11 +305,54 @@
         }
     });
 
-    clientUpdateForm.addEventListener("reset", () => {
-        window.setTimeout(() => {
+    clientUpdateForm.addEventListener("reset", function () {
+        window.setTimeout(function () {
             setFormMessage("", "");
         }, 0);
     });
+
+    async function handleClientDownload() {
+        const downloadButtonLabel = downloadClientButton.querySelector("span");
+
+        downloadClientButton.disabled = true;
+        downloadClientButton.classList.add("is-loading");
+        downloadButtonLabel.textContent = "Downloading...";
+        setFormMessage("Fetching client details for download...", "info");
+
+        try {
+            const response = await fetch(
+                "https://ph34p6lq31.execute-api.us-east-1.amazonaws.com/default/aadhi_get_client_details"
+            );
+            const apiResponse = await readApiResponse(response);
+            const responseData = apiResponse.parsedData;
+            const rows = extractRows(responseData);
+
+            if (!response.ok) {
+                throw new Error("Unable to fetch client details for download. Status: " + response.status);
+            }
+
+            if (!rows.length) {
+                throw new Error(
+                    apiResponse.rawText && apiResponse.rawText.trim()
+                        ? "API responded, but no downloadable client rows were found."
+                        : "API response was empty."
+                );
+            }
+
+            downloadExcelFromRows(rows);
+            setFormMessage("Client details downloaded successfully.", "success");
+        } catch (error) {
+            setFormMessage(error.message || "Something went wrong while downloading the client details.", "error");
+        } finally {
+            downloadClientButton.disabled = false;
+            downloadClientButton.classList.remove("is-loading");
+            downloadButtonLabel.textContent = "Download Excel";
+        }
+    }
+
+    if (downloadClientButton) {
+        downloadClientButton.addEventListener("click", handleClientDownload);
+    }
 </script>
 </body>
 </html>

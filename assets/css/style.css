@@ -3016,6 +3016,49 @@ body.client-update-page {
     color: #0a5c96;
 }
 
+.client-download-button {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1001;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #0f8f47, #17a85a);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(15, 143, 71, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.client-download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(15, 143, 71, 0.34);
+}
+
+.client-download-button:disabled {
+    opacity: 0.75;
+    cursor: wait;
+}
+
+.client-download-button.is-loading i {
+    animation: client-download-spin 0.9s linear infinite;
+}
+
+@keyframes client-download-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @media (max-width: 700px) {
     .client-update-main {
         width: min(100% - 20px, 960px);
@@ -3037,6 +3080,12 @@ body.client-update-page {
     .client-update-submit,
     .client-update-reset {
         width: 100%;
+    }
+
+    .client-download-button {
+        right: 16px;
+        bottom: 16px;
+        padding: 12px 16px;
     }
 }
 
