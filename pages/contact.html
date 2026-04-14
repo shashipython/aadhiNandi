@@ -5,45 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-<header>
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+<body class="contact-page">
+
+<header class="contact-header">
+    <div class="contact-header-inner">
+        <div class="contact-brand">
+            <span class="contact-brand-mark">NAMO</span>
+            <div>
+                <p class="contact-brand-label">We Are Here to Help</p>
+                <h2>Contact Us</h2>
+            </div>
+        </div>
+        <nav class="contact-nav">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
 
-<!-- CONTACT SECTION -->
-<section class="contact">
-    <h2>Contact Us</h2>
+<main class="contact-main">
+    <section class="contact-hero">
+        <div class="contact-hero-copy">
+            <span class="contact-eyebrow">Reach Out Anytime</span>
+            <h1>Let’s Talk About the Right Financial and Insurance Solution for You</h1>
+            <p>
+                Whether you want guidance on savings, insurance, group plans, or future financial planning,
+                we are ready to help you take the next step with clarity and confidence.
+            </p>
+        </div>
+        <div class="contact-hero-card">
+            <strong>How We Can Help</strong>
+            <ul>
+                <li>Answer questions about our services</li>
+                <li>Help you compare suitable options</li>
+                <li>Assist with quote requests and next steps</li>
+            </ul>
+        </div>
+    </section>
 
-    <div class="contact-info">
-        <p><strong>Address:</strong> 123 Cooperative Street, City, India</p>
-        <p><strong>Phone:</strong> +91 9876543210</p>
-        <p><strong>Email:</strong> info@cooperative.com</p>
-    </div>
+    <section class="contact-layout">
+        <div class="contact-details-panel">
+            <div class="contact-section-heading">
+                <span class="contact-eyebrow contact-eyebrow-dark">Contact Details</span>
+                <h2>Get in Touch</h2>
+                <p>Choose the contact method that works best for you and we will be glad to assist.</p>
+            </div>
 
-    <form class="contact-form">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-</section>
+            <div class="contact-card-grid">
+                <article class="contact-card">
+                    <i class="fas fa-location-dot"></i>
+                    <h3>Visit Us</h3>
+                    <p>1920, Ground Floor, Maigur Road, Desai Circle, Near Teli Hospital, Jamkhandi - 587301, Dist. Bagalkote</p>
+                </article>
 
-<footer>
-    <p>© 2026 Cooperative Society</p>
-</footer>
-</body>
-</html>
+                <article class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>+91 9876543210</p>
+                </article>
+
+                <article class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>info@cooperative.com</p>
+                </article>
+            </div>
+        </div>
+
+        <section class="contact-form-panel">
+            <div class="contact-section-heading">
+                <span class="contact-eyebrow contact-eyebrow-dark">Send a Message</span>
+                <h2>We’ll Get Back to You</h2>
+            </div>
+
+            <form class="contact-form">
+                <div class="contact-form-grid">
+                    <div class="contact-field">
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" name="contact-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="contact-field">
+                        <label for="contact-email">Your Email</label>
+                        <input type="email" id="contact-email" name="contact-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="contact-field contact-field-full">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="contact-subject" placeholder="How can we help you?">
+                    </div>
+                    <div class="contact-field contact-field-full">
+                        <label for="contact-message">Your Message</label>
+                        <textarea id="contact-message" name="contact-message" rows="6" placeholder="Write your message here" required></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </section>
+</main>
 
 <footer>
     <div class="footer-container">
-        <p>© 2026 Cooperative Society</p>
-        <p>Email: info@cooperative.com | Phone: +91 xxxxxxxxxx</p>
+        <p>&copy; 2026 Cooperative Society</p>
+        <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
         <div class="social-icons">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -52,4 +119,5 @@
     </div>
 </footer>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>

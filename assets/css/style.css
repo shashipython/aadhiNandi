@@ -593,7 +593,7 @@ body.shubh-page {
     position: sticky;
     top: 0;
     z-index: 10;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 20px;
     padding: 14px 24px;
     background: rgba(5, 52, 110, 0.94);
@@ -601,10 +601,24 @@ body.shubh-page {
     box-shadow: 0 10px 30px rgba(5, 52, 110, 0.18);
 }
 
+.shubh-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.shubh-brand-name {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
 .shubh-header-nav {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-left: auto;
 }
 
 .shubh-header-nav a {
@@ -1165,12 +1179,12 @@ body.shubh-page {
 /* LIFE INSURANCE PAGE */
 body.life-page {
     background:
-        radial-gradient(circle at top right, rgba(245, 158, 11, 0.16), transparent 24%),
-        linear-gradient(180deg, #fffaf2 0%, #f7fbff 52%, #fffdf8 100%);
+        radial-gradient(circle at top left, rgba(139, 92, 246, 0.16), transparent 24%),
+        linear-gradient(180deg, #f7f4ff 0%, #f7fbff 52%, #fcfbff 100%);
 }
 
 .life-header {
-    background: linear-gradient(90deg, #8a4b08, #c26a0a);
+    background: linear-gradient(90deg,  #0f2f5b, #14579b);
     box-shadow: 0 10px 30px rgba(138, 75, 8, 0.18);
 }
 
@@ -1180,7 +1194,7 @@ body.life-page {
     gap: 24px;
     padding: 34px;
     border-radius: 28px;
-    background: linear-gradient(135deg, #8a4b08, #d78412);
+    background: linear-gradient(135deg,  #0f2f5b, #14579b);
     color: #ffffff;
 }
 
@@ -1273,8 +1287,8 @@ body.life-page {
 /* GENERAL INSURANCE PAGE */
 body.general-page {
     background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 24%),
-        linear-gradient(180deg, #f4f9ff 0%, #f7fbff 50%, #fdfefe 100%);
+        radial-gradient(circle at top right, rgba(245, 158, 11, 0.16), transparent 24%),
+        linear-gradient(180deg, #fffaf2 0%, #f7fbff 52%, #fffdf8 100%);
 }
 
 .general-header {
@@ -1439,12 +1453,12 @@ body.group-term-page {
 /* GROUP MEDICLAIM PAGE */
 body.group-mediclaim-page {
     background:
-        radial-gradient(circle at top right, rgba(16, 185, 129, 0.16), transparent 24%),
-        linear-gradient(180deg, #f2fffa 0%, #f7fbff 52%, #fbfffe 100%);
+        radial-gradient(circle at top left, rgba(139, 92, 246, 0.16), transparent 24%),
+        linear-gradient(180deg, #f7f4ff 0%, #f7fbff 52%, #fcfbff 100%);
 }
 
 .group-mediclaim-header {
-    background: linear-gradient(90deg, #0f766e, #14b8a6);
+    background: linear-gradient(90deg,  #0f2f5b, #14579b);
     box-shadow: 0 10px 30px rgba(15, 118, 110, 0.18);
 }
 
@@ -1454,7 +1468,7 @@ body.group-mediclaim-page {
     gap: 24px;
     padding: 34px;
     border-radius: 28px;
-    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    background: linear-gradient(135deg,  #0f2f5b, #14579b);
     color: #ffffff;
 }
 
@@ -1516,6 +1530,473 @@ body.group-mediclaim-page {
 
     .group-mediclaim-hero {
         padding: 22px;
+    }
+}
+
+/* TRAVEL INSURANCE PAGE */
+body.travel-page {
+    background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 24%),
+        linear-gradient(180deg, #f4f9ff 0%, #f7fbff 50%, #fdfefe 100%);
+}
+
+.travel-header {
+    background: linear-gradient(90deg,   #0f2f5b, #14579b);
+    box-shadow: 0 10px 30px rgba(21, 94, 117, 0.18);
+}
+
+.travel-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 24px;
+    padding: 34px;
+    border-radius: 28px;
+    background: linear-gradient(135deg,  #0f2f5b, #14579b);
+    color: #ffffff;
+}
+
+.travel-hero h1 {
+    margin: 0 0 14px;
+    text-align: left;
+    color: #ffffff;
+    font-size: clamp(2.1rem, 4vw, 3.6rem);
+    line-height: 1.05;
+}
+
+.travel-hero p {
+    max-width: 650px;
+    color: rgba(255, 255, 255, 0.94);
+    line-height: 1.8;
+}
+
+.travel-hero-panel {
+    display: flex;
+    align-items: center;
+}
+
+.travel-hero-badge {
+    width: 100%;
+    padding: 24px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.travel-hero-badge strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #cffafe;
+    font-size: 1.05rem;
+}
+
+.travel-hero-badge ul {
+    padding-left: 20px;
+}
+
+.travel-hero-badge li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.travel-highlight-band {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 26px;
+}
+
+@media (max-width: 900px) {
+    .travel-hero,
+    .travel-highlight-band {
+        grid-template-columns: 1fr;
+    }
+
+    .travel-hero {
+        padding: 22px;
+    }
+}
+
+/* AADHINANDHI PAGE */
+body.aadhi-page {
+    background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 24%),
+        linear-gradient(180deg, #f7fbf7 0%, #f7fbff 50%, #fcfffd 100%);
+}
+
+.aadhi-header {
+    background: linear-gradient(90deg, #0b3f2e, #14704f);
+    box-shadow: 0 10px 28px rgba(11, 63, 46, 0.16);
+}
+
+.aadhi-header-inner {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 9px;
+}
+
+.aadhi-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.aadhi-brand-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.24);
+}
+
+.aadhi-brand-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ffffff;
+    padding-left: 4px;
+}
+
+.aadhi-brand-label {
+    margin: 0 0 2px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d8ffe8;
+}
+
+.aadhi-brand h1 {
+    margin: 0;
+    text-align: left;
+    color: #ffffff;
+    font-size: 1.35rem;
+}
+
+.aadhi-service-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    margin-top: 10px;
+    padding-top: 2px;
+}
+
+.aadhi-dropdown {
+    position: relative;
+}
+
+.aadhi-dropdown-toggle::after {
+    content: " \25BE";
+    font-size: 0.75rem;
+}
+
+.aadhi-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 210px;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 16px 30px rgba(11, 63, 46, 0.16);
+    z-index: 1001;
+}
+
+.aadhi-dropdown-menu a {
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: #0b3f2e;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.aadhi-dropdown-menu a:hover {
+    background: #e8f7ef;
+}
+
+.aadhi-dropdown:hover .aadhi-dropdown-menu {
+    display: flex;
+}
+
+.aadhi-service-nav a {
+    color: #d8ffe8;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.aadhi-header-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.aadhi-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.aadhi-nav a,
+.aadhi-social a {
+    color: #ffffff;
+}
+
+.aadhi-nav a {
+    margin-left: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.aadhi-social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.aadhi-social a {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    text-decoration: none;
+}
+
+.aadhi-main {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 54px;
+}
+
+.aadhi-eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #dcfce7;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.aadhi-eyebrow-dark {
+    background: #e8f7ef;
+    color: #14704f;
+}
+
+.aadhi-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 24px;
+    padding: 34px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #0b3f2e, #1d8a63);
+    color: #ffffff;
+}
+
+.aadhi-hero h2 {
+    margin: 0 0 14px;
+    text-align: left;
+    color: #ffffff;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.06;
+}
+
+.aadhi-hero p {
+    max-width: 680px;
+    color: rgba(255, 255, 255, 0.93);
+    line-height: 1.8;
+}
+
+.aadhi-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.aadhi-outline-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    border-radius: 999px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.aadhi-hero-card {
+    padding: 24px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.aadhi-hero-card strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #dcfce7;
+    font-size: 1.05rem;
+}
+
+.aadhi-hero-card ul {
+    padding-left: 20px;
+}
+
+.aadhi-hero-card li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.aadhi-section,
+.aadhi-contact {
+    margin-top: 26px;
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(11, 63, 46, 0.08);
+    box-shadow: 0 16px 34px rgba(20, 82, 59, 0.08);
+}
+
+.aadhi-section-alt {
+    background: linear-gradient(180deg, #ffffff, #f4fbf7);
+}
+
+.aadhi-section-heading {
+    margin-bottom: 22px;
+}
+
+.aadhi-section-heading h2 {
+    margin: 0 0 10px;
+    text-align: left;
+    color: #0b3f2e;
+}
+
+.aadhi-section-heading p,
+.aadhi-card p,
+.aadhi-panel li,
+.aadhi-news-card p,
+.aadhi-contact-card p {
+    color: #4a6657;
+    line-height: 1.8;
+}
+
+.aadhi-grid,
+.aadhi-news-grid,
+.aadhi-contact-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.aadhi-grid,
+.aadhi-news-grid,
+.aadhi-contact-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aadhi-card,
+.aadhi-news-card,
+.aadhi-contact-card,
+.aadhi-panel {
+    padding: 24px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff, #f5fbf7);
+    border: 1px solid #dcefe4;
+}
+
+.aadhi-card i,
+.aadhi-contact-card i {
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+    color: #14704f;
+}
+
+.aadhi-card h3,
+.aadhi-panel h3,
+.aadhi-news-card h3,
+.aadhi-contact-card h3 {
+    margin: 0 0 10px;
+    color: #0b3f2e;
+}
+
+.aadhi-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.aadhi-panel ul {
+    padding-left: 20px;
+}
+
+.aadhi-news-tag {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #e8f7ef;
+    color: #14704f;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .aadhi-hero,
+    .aadhi-grid,
+    .aadhi-split,
+    .aadhi-news-grid,
+    .aadhi-contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .aadhi-main {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+    }
+
+    .aadhi-section,
+    .aadhi-contact,
+    .aadhi-hero {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 640px) {
+    .aadhi-header-inner,
+    .aadhi-header-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: min(100% - 20px, 1180px);
+    }
+
+    .aadhi-nav a {
+        margin-left: 0;
+        margin-right: 14px;
+    }
+
+    .aadhi-service-nav {
+        gap: 6px 12px;
+    }
+
+    .aadhi-hero h2 {
+        font-size: 2rem;
+    }
+
+    .aadhi-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 }
 
@@ -2142,6 +2623,260 @@ body.home-page {
     }
 }
 
+/* CONTACT PAGE REDESIGN */
+body.contact-page {
+    background:
+        radial-gradient(circle at top right, rgba(20, 87, 155, 0.14), transparent 24%),
+        linear-gradient(180deg, #f5f9ff 0%, #f8fbff 52%, #fcfdff 100%);
+}
 
+.contact-header {
+    background: linear-gradient(90deg, #0f2f5b, #14579b);
+    box-shadow: 0 10px 28px rgba(15, 47, 91, 0.16);
+}
 
+.contact-header-inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 0;
+}
 
+.contact-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #ffffff;
+}
+
+.contact-brand-mark {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #0f2f5b;
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+}
+
+.contact-brand-label {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d7e9ff;
+}
+
+.contact-brand h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.35rem;
+}
+
+.contact-nav a {
+    margin-left: 18px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.contact-main {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 54px;
+}
+
+.contact-eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fde68a;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.contact-eyebrow-dark {
+    background: #e8f1ff;
+    color: #14579b;
+}
+
+.contact-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 24px;
+    padding: 34px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #0f2f5b, #1d74c9);
+    color: #ffffff;
+}
+
+.contact-hero h1 {
+    margin: 0 0 14px;
+    text-align: left;
+    color: #ffffff;
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    line-height: 1.06;
+}
+
+.contact-hero p {
+    max-width: 680px;
+    color: rgba(255, 255, 255, 0.93);
+    line-height: 1.8;
+}
+
+.contact-hero-card {
+    padding: 24px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-hero-card strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #fde68a;
+    font-size: 1.05rem;
+}
+
+.contact-hero-card ul {
+    padding-left: 20px;
+}
+
+.contact-hero-card li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 24px;
+    margin-top: 26px;
+}
+
+.contact-details-panel,
+.contact-form-panel {
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(15, 47, 91, 0.08);
+    box-shadow: 0 16px 34px rgba(28, 68, 118, 0.08);
+}
+
+.contact-section-heading {
+    margin-bottom: 22px;
+}
+
+.contact-section-heading h2 {
+    margin: 0 0 10px;
+    text-align: left;
+    color: #0f2f5b;
+}
+
+.contact-section-heading p,
+.contact-card p {
+    color: #4a5f77;
+    line-height: 1.8;
+}
+
+.contact-card-grid {
+    display: grid;
+    gap: 18px;
+}
+
+.contact-card {
+    padding: 22px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff, #f5f9ff);
+    border: 1px solid #d9e7f7;
+}
+
+.contact-card i {
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+    color: #14579b;
+}
+
+.contact-card h3 {
+    margin: 0 0 8px;
+    color: #0f2f5b;
+}
+
+.contact-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.contact-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-field label {
+    margin-bottom: 8px;
+    color: #0f2f5b;
+    font-weight: 700;
+}
+
+.contact-field input,
+.contact-field textarea {
+    padding: 12px 14px;
+    border: 1px solid #c7d9ee;
+    border-radius: 14px;
+    background: #ffffff;
+    font: inherit;
+}
+
+.contact-field-full {
+    grid-column: 1 / -1;
+}
+
+.contact-form .btn {
+    margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+    .contact-hero,
+    .contact-layout,
+    .contact-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-main {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+    }
+
+    .contact-details-panel,
+    .contact-form-panel,
+    .contact-hero {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        width: min(100% - 20px, 1180px);
+    }
+
+    .contact-nav a {
+        margin-left: 0;
+        margin-right: 14px;
+    }
+
+    .contact-hero h1 {
+        font-size: 2rem;
+    }
+}
