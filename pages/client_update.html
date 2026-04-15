@@ -79,15 +79,34 @@
     </section>
 </main>
 
-<button
-    type="button"
-    id="downloadClientDetailsButton"
-    class="client-download-button"
-    aria-label="Download client details in Excel format"
->
-    <i class="fas fa-file-excel" aria-hidden="true"></i>
-    <span>Download Excel</span>
-</button>
+<div class="client-floating-actions">
+    <input
+        type="file"
+        id="clientUploadInput"
+        class="client-upload-input"
+        accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+    >
+
+    <button
+        type="button"
+        id="uploadClientDetailsButton"
+        class="client-upload-button"
+        aria-label="Upload client details from Excel file"
+    >
+        <i class="fas fa-upload" aria-hidden="true"></i>
+        <span>Upload Excel</span>
+    </button>
+
+    <button
+        type="button"
+        id="downloadClientDetailsButton"
+        class="client-download-button"
+        aria-label="Download client details in Excel format"
+    >
+        <i class="fas fa-file-excel" aria-hidden="true"></i>
+        <span>Download Excel</span>
+    </button>
+</div>
 
 <footer>
     <div class="footer-container">
@@ -104,6 +123,8 @@
 <script>
     const clientUpdateForm = document.getElementById("clientUpdateForm");
     const formMessage = document.getElementById("formMessage");
+    const clientUploadInput = document.getElementById("clientUploadInput");
+    const uploadClientButton = document.getElementById("uploadClientDetailsButton");
     const downloadClientButton = document.getElementById("downloadClientDetailsButton");
 
     function setFormMessage(message, type) {
@@ -202,6 +223,44 @@
     function escapeCsv(value) {
         const stringValue = String(value == null ? "" : value);
         return '"' + stringValue.replace(/"/g, '""') + '"';
+    }
+
+    function getResponseMessage(responseData, fallbackMessage) {
+        if (!responseData) {
+            return fallbackMessage;
+        }
+
+        if (typeof responseData === "string" && responseData.trim()) {
+            return responseData;
+        }
+
+        if (responseData.message) {
+            return responseData.message;
+        }
+
+        if (responseData.body && typeof responseData.body === "string") {
+            return responseData.body;
+        }
+
+        return fallbackMessage;
+    }
+
+    function convertFileToBase64(file) {
+        return new Promise(function (resolve, reject) {
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const result = typeof reader.result === "string" ? reader.result : "";
+                const base64Content = result.includes(",") ? result.split(",")[1] : result;
+                resolve(base64Content);
+            };
+
+            reader.onerror = function () {
+                reject(new Error("Unable to read the selected Excel file."));
+            };
+
+            reader.readAsDataURL(file);
+        });
     }
 
     function downloadExcelFromRows(rows) {
@@ -311,6 +370,46 @@
         }, 0);
     });
 
+    async function uploadClientFile(file) {
+        const uploadButtonLabel = uploadClientButton.querySelector("span");
+
+        uploadClientButton.disabled = true;
+        uploadClientButton.classList.add("is-loading");
+        uploadButtonLabel.textContent = "Uploading...";
+        setFormMessage("Uploading client details from Excel file...", "info");
+
+        try {
+            const base64File = await convertFileToBase64(file);
+            const response = await fetch(
+                "https://ab82elgnlf.execute-api.us-east-1.amazonaws.com/aadhi_upload-client_data_api/aadhi_upload_client_data",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        file: base64File
+                    })
+                }
+            );
+            const apiResponse = await readApiResponse(response);
+            const responseData = apiResponse.parsedData;
+
+            if (!response.ok) {
+                throw new Error(getResponseMessage(responseData, "Unable to upload client details. Please try again."));
+            }
+
+            setFormMessage(getResponseMessage(responseData, "Data updated successfully."), "success");
+            clientUploadInput.value = "";
+        } catch (error) {
+            setFormMessage(error.message || "Something went wrong while uploading the client details.", "error");
+        } finally {
+            uploadClientButton.disabled = false;
+            uploadClientButton.classList.remove("is-loading");
+            uploadButtonLabel.textContent = "Upload Excel";
+        }
+    }
+
     async function handleClientDownload() {
         const downloadButtonLabel = downloadClientButton.querySelector("span");
 
@@ -352,6 +451,31 @@
 
     if (downloadClientButton) {
         downloadClientButton.addEventListener("click", handleClientDownload);
+    }
+
+    if (uploadClientButton) {
+        uploadClientButton.addEventListener("click", function () {
+            clientUploadInput.click();
+        });
+    }
+
+    if (clientUploadInput) {
+        clientUploadInput.addEventListener("change", function (event) {
+            const selectedFile = event.target.files && event.target.files[0];
+
+            if (!selectedFile) {
+                return;
+            }
+
+            const fileName = selectedFile.name.toLowerCase();
+            if (!fileName.endsWith(".xlsx") && !fileName.endsWith(".xls")) {
+                clientUploadInput.value = "";
+                setFormMessage("Please choose a valid Excel file in .xlsx or .xls format.", "error");
+                return;
+            }
+
+            uploadClientFile(selectedFile);
+        });
     }
 </script>
 </body>

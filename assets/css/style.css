@@ -3016,11 +3016,23 @@ body.client-update-page {
     color: #0a5c96;
 }
 
-.client-download-button {
+.client-floating-actions {
     position: fixed;
     right: 24px;
     bottom: 24px;
     z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.client-upload-input {
+    display: none;
+}
+
+.client-upload-button,
+.client-download-button {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -3036,16 +3048,28 @@ body.client-update-page {
     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
+.client-upload-button {
+    background: linear-gradient(135deg, #14579b, #1d74c9);
+    box-shadow: 0 14px 28px rgba(20, 87, 155, 0.28);
+}
+
+.client-upload-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(20, 87, 155, 0.34);
+}
+
 .client-download-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 18px 34px rgba(15, 143, 71, 0.34);
 }
 
+.client-upload-button:disabled,
 .client-download-button:disabled {
     opacity: 0.75;
     cursor: wait;
 }
 
+.client-upload-button.is-loading i,
 .client-download-button.is-loading i {
     animation: client-download-spin 0.9s linear infinite;
 }
@@ -3082,9 +3106,13 @@ body.client-update-page {
         width: 100%;
     }
 
-    .client-download-button {
+    .client-floating-actions {
         right: 16px;
         bottom: 16px;
+    }
+
+    .client-upload-button,
+    .client-download-button {
         padding: 12px 16px;
     }
 }
