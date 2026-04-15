@@ -2929,6 +2929,49 @@ body.client-update-page {
     line-height: 1.7;
 }
 
+.client-template-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 28px;
+    padding: 20px 22px;
+    border: 1px solid #d9e7f7;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #f5f9ff, #eef6ff);
+}
+
+.client-template-copy h2 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    color: #004080;
+}
+
+.client-template-copy p {
+    color: #506780;
+    line-height: 1.7;
+}
+
+.client-template-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #17355c;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 12px 24px rgba(245, 158, 11, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-template-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(245, 158, 11, 0.28);
+}
+
 .client-update-form {
     max-width: 100%;
 }
@@ -3091,6 +3134,11 @@ body.client-update-page {
 
     .client-update-card {
         padding: 22px;
+    }
+
+    .client-template-card {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .client-update-grid {
