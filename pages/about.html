@@ -1,48 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+
+<link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/services.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header>
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+    <!-- HEADER -->
+<header class="services-header">
+        <div class="services-header-inner">
+<div class="services-brand">
+                <span class="services-brand-mark">NAMO</span>
+                <div>
+                    <p class="services-brand-label">Financial Advisory</p>
+                    <h2>About Us</h2>
+                </div>
+            </div>
+<nav class="services-nav">
+                <a href="../index.html"><i class="fa fa-home"></i> Home</a>
+                <a href="about.html" class="active"><i class="fa fa-info-circle"></i> About</a>
+                <a href="services.html"><i class="fa fa-briefcase"></i> Services</a>
+                <a href="contact.html"><i class="fa fa-phone"></i> Contact</a>
+            </nav>
+        </div>
+    </header>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<!-- ABOUT SECTION -->
-<main>
-    <section class="about">
-        <h1>About Our Cooperative Society</h1>
-        <p>We are a trusted cooperative society providing financial services to our members. Our mission is to offer easy loans, secure deposits, and digital banking services that make your financial life simple and safe.</p>
-
-        <h2>Our Vision</h2>
-        <p>To empower our community by providing accessible, reliable, and modern financial services for everyone.</p>
-
-        <h2>Our Values</h2>
-        <ul>
-            <li>Trust and Transparency</li>
-            <li>Customer Satisfaction</li>
-            <li>Community Growth</li>
-            <li>Innovation and Technology</li>
-        </ul>
+    <!-- HERO SECTION -->
+    <section class="hero-about">
+        <div class="hero-content">
+            <h1>About Our Cooperative Society</h1>
+            <p>Building trust, financial security, and growth for our community.</p>
+        </div>
     </section>
-</main>
 
-<!-- FOOTER -->
-<footer>
-    <p>© 2026 Cooperative Society</p>
-</footer>
+    <!-- ABOUT CONTENT -->
+    <main class="about-container">
+
+        <section class="about-box">
+            <h2><i class="fa fa-building"></i> Who We Are</h2>
+            <p>
+                We are a trusted cooperative society providing financial services such as loans,
+                savings, and secure deposits. Our aim is to support individuals and businesses
+                with reliable financial solutions.
+            </p>
+        </section>
+
+        <section class="about-grid">
+
+            <div class="card">
+                <h3><i class="fa fa-bullseye"></i> Our Vision</h3>
+                <p>
+                    To empower every member of our community with accessible and modern financial services.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa fa-handshake"></i> Our Mission</h3>
+                <p>
+                    To provide safe, transparent, and customer-friendly financial solutions for growth and stability.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa fa-star"></i> Our Values</h3>
+                <ul>
+                    <li>Trust & Transparency</li>
+                    <li>Customer Satisfaction</li>
+                    <li>Community Growth</li>
+                    <li>Innovation</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Cooperative Society | All Rights Reserved</p>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script src="../assets/js/script.js"></script>
+
+    <!-- WHATSAPP GLOBAL LOGO -->
+    <a class="whatsapp-global" href="https://wa.me/8748947796" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
 </body>
 </html>
