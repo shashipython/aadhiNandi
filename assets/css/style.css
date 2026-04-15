@@ -304,6 +304,90 @@ body.mf-page {
     box-shadow: 0 12px 35px #81cbd899;
 }
 
+/* Namo button full styling for left navbar - border + background #007FFF */
+.home-brand-mark, .services-brand-mark, .contact-brand-mark, .mf-brand-mark, .shubh-brand-mark, .insurance-brand-mark, .life-brand-mark, .general-brand-mark, .group-term-brand-mark, .group-mediclaim-brand-mark, .travel-brand-mark, .aadhi-brand-mark {
+    border: 2px solid #007FFF;
+    background-color: #007FFF !important;
+}
+
+/* New SIP Calculator provided by user - matching MF theme */
+.sip-calculator {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(15,47,91,0.1);
+  border: 1px solid rgba(15,47,91,0.08);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.sip-calculator h3 {
+  text-align: center;
+  color: #0f2f5b;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.sip-calculator label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sip-calculator input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 20px;
+}
+
+.sip-calculator input:focus {
+  outline: none;
+  border-color: #0f2f5b;
+  box-shadow: 0 0 0 3px rgba(15,47,91,0.1);
+}
+
+.sip-calculator button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #0f2f5b, #1d74c9);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sip-calculator button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(15,47,91,0.3);
+}
+
+.sip-calculator h4#result {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .sip-calculator {
+    padding: 20px;
+    margin: 20px;
+  }
+}
+
 .mf-btn-secondary {
     border: 2px solid #448ba299;
     color: #ffffff;

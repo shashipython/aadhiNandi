@@ -55,33 +55,18 @@
         </div>
     </section>
 
-    <!-- SIP CALCULATOR id="sip-calc"-->
-    <section class="mf-sip-calc" id="sip-calc">
-        <div class="mf-sip-title">
-            <h2><i class="fas fa-calculator"></i> SIP Calculator</h2>
-            <p>Enter your details to see power of compounding</p>
-        </div>
-        <div class="mf-sip-grid">
-            <div class="mf-field">
-                <label>Monthly Investment (₹)</label>
-                <input type="number" id="monthlyAmt" value="5000" min="500">
-            </div>
-            <div class="mf-field">
-                <label>Expected Return (% p.a.)</label>
-                <input type="number" id="annualRate" value="12" min="1" max="25" step="0.1">
-            </div>
-            <div class="mf-field">
-                <label>Investment Period (Years)</label>
-                <input type="number" id="investYears" value="10" min="1" max="40">
-            </div>
-        </div>
-        <button class="mf-calc-btn" onclick="calculateSIPMutualFund()">
-            <i class="fas fa-magic"></i> Calculate Future Value
-        </button>
-        <div class="mf-result" id="sipResult">
-            <div>Future Value: <span id="fvAmount">₹0</span></div>
-            <div style="font-size:0.9rem;color:#059669">Total Invested: <span id="totalInvested">₹0</span></div>
-            <div style="font-size:0.9rem;color:#059669">Wealth Gained: <span id="wealthGained">₹0</span></div>
+    <!-- User-provided SIP Calculator -->
+    <section id="sip-calc">
+        <div class="sip-calculator">
+            <h3>SIP Calculator</h3>
+            <label>Monthly Investment (₹)</label>
+            <input type="number" id="monthly" placeholder="5000">
+            <label>Interest Rate (%)</label>
+            <input type="number" id="rate" placeholder="12">
+            <label>Time (Years)</label>
+            <input type="number" id="years" placeholder="10">
+            <button onclick="calculateSIP()">Calculate</button>
+            <h4 id="result"></h4>
         </div>
     </section>
 
@@ -99,7 +84,7 @@
         </div>
         <div class="mf-funds-grid">
             <div class="mf-fund-card">
-                <div class="mf-fund-icon mf-fund-equity"><i class="fas fa-chart-line-up"></i></div>
+<div class="mf-fund-icon mf-fund-equity"><img src="../assets/images/equity-fund.png" alt="Equity Fund Symbol" style="width: 100%; height: 100%; object-fit: contain; border-radius: inherit;"></div>
                 <h3>Equity Funds</h3>
                 <div class="mf-fund-stats">
                     <div class="mf-stat"><span class="mf-stat-value">18.5%</span><span class="mf-stat-label">1 Yr Return</span></div>
@@ -156,8 +141,31 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../assets/js/script-mutualfund.js"></script>
+<script>
+function calculateSIP() {
+  const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+  const rate = parseFloat(document.getElementById('rate').value) || 0;
+  const years = parseInt(document.getElementById('years').value) || 0;
+
+  if (monthly <= 0 || rate <= 0 || years <= 0) {
+    document.getElementById('result').textContent = 'Please enter valid values';
+    return;
+  }
+
+  const monthlyRate = rate / 100 / 12;
+  const months = years * 12;
+  const futureValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+  const totalInvested = monthly * months;
+  const wealthGained = futureValue - totalInvested;
+
+  document.getElementById('result').innerHTML = `
+    Future Value: ₹${futureValue.toLocaleString('en-IN')}<br>
+    Total Invested: ₹${totalInvested.toLocaleString('en-IN')}<br>
+    Wealth Gained: ₹${wealthGained.toLocaleString('en-IN')}
+  `;
+}
+</script>
 <script src="../assets/js/script.js"></script>
 
 </body>
 </html>
-
