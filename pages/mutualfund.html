@@ -1,118 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mutual Fund Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Funds - AadhiNandhi Financial Services</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      background: #f4f6f9;
-    }
-
-    header {
-      background: #0b1f3a;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .container {
-      padding: 30px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .box {
-      background: #0b1f3a;
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    canvas {
-      max-width: 100%;
-    }
-
-    a {
-      color: white;
-      text-decoration: none;
-    }
-  </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<body class="mf-page">
 
-<body>
-
-<header>
-  <h2>Mutual Fund Dashboard</h2>
-  <a href="index.html">⬅ Back to Home</a>
+<!-- HEADER -->
+<header class="mf-header">
+    <div class="mf-header-inner">
+<div class="mf-brand">
+            <div class="mf-brand-mark">MF</div>
+            <h2>Mutual Funds</h2>
+        </div>
+        <nav class="mf-nav">
+            <a href="../index.html">Home</a>
+            <a href="mutualfund.html" class="active">Mutual Funds</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
 
-<div class="container">
+<!-- MAIN -->
+<main class="mf-main">
+    
+    <!-- HERO -->
+    <section class="mf-hero mf-animate" id="home">
+        <div>
+            <h1>Invest in Your<br><span style="color: #fbbf24;">Financial Future</span></h1>
+            <div class="mf-hero-subtitle">Start SIP from ₹500/month</div>
+            <p class="mf-hero-text">Professional mutual fund management. Equity, Debt, Hybrid & Index funds for every goal. See your money grow!</p>
+            <div class="mf-hero-cta">
+                <a href="#sip-calc" class="mf-btn-primary" onclick="scrollToCalc()">
+                    <i class="fas fa-calculator"></i> Try SIP Calculator
+                </a>
+                <a href="contact.html" class="mf-btn-secondary">Talk to Advisor</a>
+            </div>
+        </div>
+        <div class="mf-hero-panel">
+            <h3><i class="fas fa-chart-line"></i> Quick Stats</h3>
+            <div style="font-size: 0.95rem; line-height: 1.7;">
+                <div><strong>₹50 Cr+</strong> AUM</div>
+                <div><strong>5000+</strong> Happy Investors</div>
+                <div><strong>15%+</strong> Avg Returns</div>
+                <div>5 Star Funds Only</div>
+            </div>
+        </div>
+    </section>
 
-  <!-- SUMMARY -->
-  <div class="card">
-    <h3>Portfolio Summary</h3>
-    <div class="grid">
-      <div class="box">
-        <h4>₹2,50,000</h4>
-        <p>Invested</p>
-      </div>
-      <div class="box">
-        <h4>₹3,10,000</h4>
-        <p>Current Value</p>
-      </div>
-      <div class="box">
-        <h4>₹60,000</h4>
-        <p>Profit</p>
-      </div>
-    </div>
-  </div>
+    <!-- User-provided SIP Calculator -->
+    <section id="sip-calc">
+        <div class="sip-calculator">
+            <h3>SIP Calculator</h3>
+            <label>Monthly Investment (₹)</label>
+            <input type="number" id="monthly" placeholder="5000">
+            <label>Interest Rate (%)</label>
+            <input type="number" id="rate" placeholder="12">
+            <label>Time (Years)</label>
+            <input type="number" id="years" placeholder="10">
+            <button onclick="calculateSIP()">Calculate</button>
+            <h4 id="result"></h4>
+        </div>
+    </section>
 
-  <!-- CHART -->
-  <div class="card">
-    <h3>Growth Chart</h3>
-    <canvas id="myChart"></canvas>
-  </div>
+    <!-- GROWTH CHART -->
+    <section class="mf-performance">
+        <h2 id="chartTitle">Your Investment Growth</h2>
+<canvas id="sipChart"></canvas>
+    </section>
 
-</div>
+    <!-- FUND CATEGORIES -->
+    <section class="mf-funds-section">
+        <div class="mf-section-header">
+            <h2>Choose Your Fund Type</h2>
+            <p>Top performing categories for different risk profiles</p>
+        </div>
+        <div class="mf-funds-grid">
+            <div class="mf-fund-card">
+<div class="mf-fund-icon mf-fund-equity"><img src="../assets/images/equity-fund.png" alt="Equity Fund Symbol" style="width: 100%; height: 100%; object-fit: contain; border-radius: inherit;"></div>
+                <h3>Equity Funds</h3>
+                <div class="mf-fund-stats">
+                    <div class="mf-stat"><span class="mf-stat-value">18.5%</span><span class="mf-stat-label">1 Yr Return</span></div>
+                    <div class="mf-stat"><span class="mf-stat-value">14%</span><span class="mf-stat-label">Risk Level</span></div>
+                </div>
+                <a href="#contact" class="mf-btn-primary" style="margin-top:16px;width:100%">Explore</a>
+            </div>
+            <div class="mf-fund-card">
+                <div class="mf-fund-icon mf-fund-debt"><i class="fas fa-shield-alt"></i></div>
+                <h3>Debt Funds</h3>
+                <div class="mf-fund-stats">
+                    <div class="mf-stat"><span class="mf-stat-value">7.8%</span><span class="mf-stat-label">1 Yr Return</span></div>
+                    <div class="mf-stat"><span class="mf-stat-value">Low</span><span class="mf-stat-label">Risk Level</span></div>
+                </div>
+                <a href="#contact" class="mf-btn-primary" style="margin-top:16px;width:100%">Explore</a>
+            </div>
+            <div class="mf-fund-card">
+                <div class="mf-fund-icon mf-fund-hybrid"><i class="fas fa-balance-scale"></i></div>
+                <h3>Hybrid Funds</h3>
+                <div class="mf-fund-stats">
+                    <div class="mf-stat"><span class="mf-stat-value">12.2%</span><span class="mf-stat-label">1 Yr Return</span></div>
+                    <div class="mf-stat"><span class="mf-stat-value">Medium</span><span class="mf-stat-label">Risk Level</span></div>
+                </div>
+                <a href="#contact" class="mf-btn-primary" style="margin-top:16px;width:100%">Explore</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- CTA -->
+    <section class="mf-cta">
+        <h2>Ready to Start Investing?</h2>
+        <p>Our certified advisors will help you select best funds</p>
+        <div class="mf-cta-buttons">
+            <a href="contact.html" class="mf-btn-primary" style="padding:16px 32px;font-size:1.1rem">
+                <i class="fas fa-phone"></i> Free Consultation
+            </a>
+            <a href="https://wa.me/8748947796?text=I%20want%20Mutual%20Fund%20advice" class="mf-btn-secondary" style="padding:16px 32px;font-size:1.1rem">
+                <i class="fab fa-whatsapp"></i> WhatsApp Now
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="modern-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="home-brand-mark">NAMO</span>
+                    <h3>Financial and Insurance Advisory</h3>
+                    <p>Secure Fund Group</p>
+                    <p class="footer-tagline">"Your trusted partner in financial growth"</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="../index.html">Home</a>
+                    <a href="../pages/about.html">About</a>
+                    <a href="../pages/services.html">Services</a>
+                    <a href="../pages/contact.html">Contact</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +91 87489 47796</p>
+                    <p><i class="fas fa-envelope"></i> info@namoFinance.com</p>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NAMO Financial and Insurance Advisory Secure Fund Group. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+<!-- Global WhatsApp - SAME TAB FIX -->
+<a href="https://wa.me/8748947796?text=Hi%2C%20need%20financial%20help" class="whatsapp-global" title="Chat WhatsApp" onclick="window.location.href='https://wa.me/8748947796?text=Hi%2C%20need%20financial%20help'; return false;">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../assets/js/script-mutualfund.js"></script>
 <script>
-  const ctx = document.getElementById('myChart');
+function calculateSIP() {
+  const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+  const rate = parseFloat(document.getElementById('rate').value) || 0;
+  const years = parseInt(document.getElementById('years').value) || 0;
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      datasets: [{
-        label: 'Mutual Fund Growth',
-        data: [100000, 120000, 150000, 180000, 220000, 310000],
-        borderColor: '#0b1f3a',
-        fill: true,
-        tension: 0.3
-      }]
-    }
-  });
+  if (monthly <= 0 || rate <= 0 || years <= 0) {
+    document.getElementById('result').textContent = 'Please enter valid values';
+    return;
+  }
+
+  const monthlyRate = rate / 100 / 12;
+  const months = years * 12;
+  const futureValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+  const totalInvested = monthly * months;
+  const wealthGained = futureValue - totalInvested;
+
+  document.getElementById('result').innerHTML = `
+    Future Value: ₹${futureValue.toLocaleString('en-IN')}<br>
+    Total Invested: ₹${totalInvested.toLocaleString('en-IN')}<br>
+    Wealth Gained: ₹${wealthGained.toLocaleString('en-IN')}
+  `;
+}
 </script>
+<script src="../assets/js/script.js"></script>
 
 </body>
 </html>
