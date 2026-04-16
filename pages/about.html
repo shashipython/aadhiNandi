@@ -8,9 +8,11 @@
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/namo-landing.css">
+    <link rel="stylesheet" href="../assets/css/whatsapp-float.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -18,8 +20,8 @@
     <!-- HEADER -->
 <header class="services-header">
         <div class="services-header-inner">
-<div class="services-brand">
-                <span class="services-brand-mark">NAMO</span>
+            <div class="services-brand">
+                <img src="../assets/images/NaMo logo.jpeg" alt="NaMo Logo" class="header-logo">
                 <div>
                     <p class="services-brand-label">NAMO Financial Protection and Growth</p>
                     <h2>About Us</h2>
@@ -35,43 +37,46 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="hero-about">
-        <div class="hero-content">
+    <section class="hero">
+        <div class="container">
             <h1>About Our Cooperative Society</h1>
             <p>Building trust, financial security, and growth for our community.</p>
+            <a href="#about-content" class="btn">Learn More</a>
         </div>
     </section>
 
     <!-- ABOUT CONTENT -->
-    <main class="about-container">
+<main id="about-content" class="namo-landing">
 
-        <section class="about-box">
-            <h2><i class="fa fa-building"></i> Who We Are</h2>
-            <p>
-                We are a trusted cooperative society providing financial services such as loans,
-                savings, and secure deposits. Our aim is to support individuals and businesses
-                with reliable financial solutions.
-            </p>
-        </section>
+    <section class="about-section">
 
-        <section class="about-grid">
+        <h2 class="section-title">About Us</h2>
 
-            <div class="card">
-                <h3><i class="fa fa-bullseye"></i> Our Vision</h3>
+        <div class="about-grid">
+
+            <div class="about-card">
+                <h3>Who We Are</h3>
+                <p>
+                    We are a trusted cooperative society providing financial services such as loans, savings, and secure deposits. Our aim is to support individuals and businesses with reliable financial solutions.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <h3>Our Vision</h3>
                 <p>
                     To empower every member of our community with accessible and modern financial services.
                 </p>
             </div>
 
-            <div class="card">
-                <h3><i class="fa fa-handshake"></i> Our Mission</h3>
+            <div class="about-card">
+                <h3>Our Mission</h3>
                 <p>
                     To provide safe, transparent, and customer-friendly financial solutions for growth and stability.
                 </p>
             </div>
 
-            <div class="card">
-                <h3><i class="fa fa-star"></i> Our Values</h3>
+            <div class="about-card">
+                <h3>Our Values</h3>
                 <ul>
                     <li>Trust & Transparency</li>
                     <li>Customer Satisfaction</li>
@@ -80,15 +85,17 @@
                 </ul>
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
+
+</main>
 
     <!-- FOOTER -->
     <footer class="modern-footer">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span class="home-brand-mark">NAMO</span>
+                    <img src="../assets/images/NaMo logo.jpeg" alt="NaMo Logo" class="header-logo">
                     <h3>Financial and Insurance Advisory</h3>
                     <p>Secure Fund Group</p>
                     <p class="footer-tagline">"Your trusted partner in financial growth"</p>
@@ -123,10 +130,11 @@
     <!-- SCRIPT -->
     <script src="../assets/js/script.js"></script>
 
-    <!-- WHATSAPP GLOBAL (SAME TAB FIX) -->
-    <a class="whatsapp-global" href="https://wa.me/8748947796" title="Chat on WhatsApp" onclick="window.location.href='https://wa.me/8748947796'; return false;">
+    <!-- WHATSAPP FLOAT (SAME AS HOME PAGE - NEW TAB) -->
+    <a href="https://wa.me/8748947796" class="whatsapp-float" target="_blank" onclick="window.open('https://wa.me/8748947796', '_blank'); return false;">
         <i class="fab fa-whatsapp"></i>
     </a>
 
 </body>
+
 </html>
