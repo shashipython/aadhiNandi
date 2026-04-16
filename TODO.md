@@ -1,2 +1,6 @@
-# Index.html Update - NAMO Landing Page (Navbar Preserved)\n\n## Status: ✅ COMPLETE 🎉\n\n### Plan Breakdown:\n- ✅ **Step 1:** Create TODO.md ✅  \n- ✅ **Step 2:** Update index.html (navbar preserved + provided sections)  \n- ✅ **Step 3:** Create assets/css/namo-landing.css + link in index.html  \n- ✅ **Step 4:** Test ready: `start index.html`  \n\n### Summary:\n- **Navbar:** Preserved exactly (links to about/services/contact preserved)  \n- **New sections:** Hero/Services/Why-Us/Testimonials/Contact + responsive design  \n- **WhatsApp:** Floating button + hero CTA  \n- **Other pages:** Untouched  \n- **Theme:** Project blues (#0f2f5b) + gold (#fbbf24)\n\n**Result:** Modern landing page with preserved navigation!\n
+# Task: Multiple heading colors to white (Completed)
 
+## Steps:
+1. [x] index.html hero h1 & contact h2 (namo-landing.css)
+2. [x] pages/about.html "About Our Cooperative Society" h1 (.hero-about h1 in style.css)
+3. [x] Verify all (refresh pages)
