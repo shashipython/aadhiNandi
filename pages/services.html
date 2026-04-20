@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l̥<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,40 +23,24 @@
                     <h2>Our Services</h2>
                 </div>
             </div>
-        <nav>
-            <a href="../index.html"><i class="fa fa-home"></i> Home</a>
-<a href="about.html"><i class="fa fa-info-circle"></i> About</a>
-<a href="services.html" class="active"><i class="fa fa-briefcase"></i> Services</a>
-            <a href="contact.html"><i class="fa fa-phone"></i> Contact</a>
+        <button class="nav-toggle" aria-label="Toggle Menu">
+            <i class="fa fa-bars"></i>
+        </button>
+        <nav class="services-nav">
+            <a href="../index.html" class="nav-link"><i class="fa fa-home"></i> Home</a>
+            <a href="about.html" class="nav-link"><i class="fa fa-info-circle"></i> About</a>
+            <a href="services.html" class="active nav-link"><i class="fa fa-briefcase"></i> Services</a>
+            <a href="contact.html" class="nav-link"><i class="fa fa-phone"></i> Contact</a>
         </nav>
         </div>
     </header>
 
     <main class="services-main">
-        <section class="services-hero">
-            <div class="services-hero-copy">
-                <span class="services-eyebrow">Smart Financial Support</span>
-                <h1>Solutions Designed for Savings, Security, and Long-Term Confidence</h1>
-                <p>
-                    Explore financial and insurance services created to support families, professionals,
-                    groups, and growing organizations. From savings-led products to protection-focused plans,
-                    each service is designed to help you move ahead with more clarity and confidence.
-                </p>
-                <div class="services-hero-actions">
-                    <a href="#services-grid" class="btn">Explore Services</a>
-                    <a href="contact.html" class="services-outline-btn">Talk to Us</a>
-                </div>
-            </div>
-            <div class="services-hero-panel">
-                <div class="services-hero-card">
-                    <strong>What You Can Find Here</strong>
-                    <ul>
-                        <li>Savings and chit-based growth options</li>
-                        <li>Insurance plans for life, health, and assets</li>
-                        <li>Group protection products for organizations</li>
-                        <li>Investment and future-planning support</li>
-                    </ul>
-                </div>
+<section class="hero">
+            <div class="container">
+                <h1>Protect Your Future with Smart Financial Planning</h1>
+                <p>Insurance | Mutual Funds | Investment Solutions</p>
+                <a href="#services-grid" class="btn">Get Free Consultation</a>
             </div>
         </section>
 
@@ -218,8 +202,31 @@
         </footer>
 
     <script>
-        const serviceCards = document.querySelectorAll('.services-card');
+        // Mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const servicesNav = document.querySelector('.services-nav');
+        
+        if (navToggle && servicesNav) {
+          navToggle.addEventListener('click', () => {
+            servicesNav.classList.toggle('active');
+            const icon = navToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+          });
+          
+          // Close nav on link click
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+              servicesNav.classList.remove('active');
+              const icon = navToggle.querySelector('i');
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            });
+          });
+        }
 
+        // Service cards animation
+        const serviceCards = document.querySelectorAll('.services-card');
         function revealServiceCards() {
             const triggerBottom = window.innerHeight * 0.85;
             serviceCards.forEach(card => {
@@ -229,10 +236,9 @@
                 }
             });
         }
-
         window.addEventListener('load', revealServiceCards);
         window.addEventListener('scroll', revealServiceCards);
-</script>
+    </script>
 
 <script src="../assets/js/script.js"></script>
 
