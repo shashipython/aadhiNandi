@@ -159,6 +159,7 @@
         "total_mutulfund_sip",
         "family_dependents"
     ];
+    let preserveSuccessMessageOnReset = false;
 
     function setAgentFormMessage(message, type) {
         agentFormMessage.textContent = message;
@@ -416,9 +417,11 @@
                 throw new Error(getResponseMessage(responseData, "Unable to create enquiry. Please try again."));
             }
 
-            setAgentFormMessage(getResponseMessage(responseData, "Enquiry created successfully."), "success");
+            const successMessage = getResponseMessage(responseData, "Enquiry created successfully.");
+            preserveSuccessMessageOnReset = true;
             agentClientForm.reset();
             updateMarriageDateState();
+            setAgentFormMessage(successMessage, "success");
         } catch (error) {
             setAgentFormMessage(error.message || "Something went wrong while creating the enquiry.", "error");
         } finally {
@@ -430,7 +433,13 @@
     agentClientForm.addEventListener("reset", function () {
         window.setTimeout(function () {
             clearFieldErrors();
-            setAgentFormMessage("", "");
+
+            if (preserveSuccessMessageOnReset) {
+                preserveSuccessMessageOnReset = false;
+            } else {
+                setAgentFormMessage("", "");
+            }
+
             updateMarriageDateState();
         }, 0);
     });
