@@ -486,6 +486,59 @@
         return "";
     }
 
+    function getAgentApprovalStatus(responseData) {
+        const possibleKeys = [
+            "key",
+            "approval_status",
+            "approve_status",
+            "agent_approval_status",
+            "agent_approve_status",
+            "status"
+        ];
+
+        for (const key of possibleKeys) {
+            const value = getResponseValue(responseData, key);
+
+            if (value) {
+                return value;
+            }
+        }
+
+        const approvedValue = getResponseValue(responseData, "approved");
+
+        if (approvedValue) {
+            return approvedValue;
+        }
+
+        return "";
+    }
+
+    async function checkAgentApproval(email) {
+        const response = await fetch(
+            "https://tu8s9wuor6.execute-api.us-east-1.amazonaws.com/aadhi_check_agent_api_deploy/aadhi_check_agent_aproval",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    role: "agent"
+                })
+            }
+        );
+        const responseData = await readApiResponse(response);
+
+        if (!response.ok) {
+            throw new Error(getResponseMessage(responseData, "Unable to verify agent approval status."));
+        }
+
+        return {
+            responseData: responseData,
+            approvalStatus: getAgentApprovalStatus(responseData)
+        };
+    }
+
     function hideRoleAccessLinks() {
         agentAccessLink.classList.remove("is-visible");
         adminAccessLink.classList.remove("is-visible");
@@ -497,7 +550,10 @@
 
         hideRoleAccessLinks();
 
-        if (normalizedRole === "agent" && normalizedKey === "agentapprove") {
+        if (
+            normalizedRole === "agent" &&
+            (normalizedKey === "agentapprove" || normalizedKey === "approved" || normalizedKey === "approve" || normalizedKey === "true" || normalizedKey === "yes")
+        ) {
             agentAccessLink.classList.add("is-visible");
             return "pages/agent_client.html";
         }
@@ -704,8 +760,15 @@
                 throw new Error(getResponseMessage(responseData, "Unable to login. Please check your email and password."));
             }
 
-            const role = getResponseValue(responseData, "role");
-            const approvalKey = getResponseValue(responseData, "key");
+            const role = getResponseValue(responseData, "role").toLowerCase();
+            let approvalKey = getResponseValue(responseData, "key");
+
+            if (role === "agent") {
+                setAuthMessage(loginMessage, "Login successful. Checking agent approval status...", "info");
+                const approvalResult = await checkAgentApproval(payload.email);
+                approvalKey = approvalResult.approvalStatus;
+            }
+
             const nextPage = applyLoggedInAccess(role, approvalKey);
 
             if (!nextPage) {
