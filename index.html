@@ -23,7 +23,12 @@
             <a href="pages/about.html">About</a>
             <a href="pages/services.html">Services</a>
             <a href="pages/contact.html">Contact</a>
-            <a href="pages/client_update.html" class="home-outline-btn">Admin</a>
+            <a href="pages/agent_client.html" id="agentAccessLink" class="home-outline-btn role-access-link">Agent</a>
+            <span class="home-auth-actions">
+                <button type="button" id="openSignupButton" class="home-auth-button">Signup</button>
+                <button type="button" id="openLoginButton" class="home-auth-button home-auth-button-primary">Login</button>
+                <a href="pages/client_update.html" id="adminAccessLink" class="home-auth-button">Admin</a>
+            </span>
         </nav>
     </div>
 </header>
@@ -119,6 +124,91 @@
     </section>
 </main>
 
+<div id="signupModal" class="auth-modal" aria-hidden="true">
+    <div class="auth-modal-panel" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+        <button type="button" class="auth-modal-close" data-close-modal aria-label="Close signup form">&times;</button>
+        <div class="auth-modal-heading">
+            <span class="client-update-badge">Create Account</span>
+            <h2 id="signupTitle">Signup</h2>
+        </div>
+
+        <form id="signupForm" class="auth-form" novalidate>
+            <div class="auth-field">
+                <label for="signupName">Name</label>
+                <input type="text" id="signupName" name="name" placeholder="Enter name" required minlength="2">
+                <span class="field-error" id="signupNameError"></span>
+            </div>
+
+            <div class="auth-field">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" name="email" placeholder="Enter email address" required>
+                <span class="field-error" id="signupEmailError"></span>
+            </div>
+
+            <div class="auth-field">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="password" placeholder="Enter password" required minlength="6">
+                <span class="field-error" id="signupPasswordError"></span>
+            </div>
+
+            <div class="auth-field">
+                <label for="signupRole">Role</label>
+                <select id="signupRole" name="role" required>
+                    <option value="">Select role</option>
+                    <option value="agent">Agent</option>
+                    <option value="admin">Admin</option>
+                    <option value="client">Client</option>
+                </select>
+                <span class="field-error" id="signupRoleError"></span>
+            </div>
+
+            <div class="auth-field">
+                <label for="signupMobile">Mobile</label>
+                <input type="tel" id="signupMobile" name="mobile" placeholder="Enter 10 digit mobile number" inputmode="numeric" maxlength="10" required>
+                <span class="field-error" id="signupMobileError"></span>
+            </div>
+
+            <div class="auth-actions">
+                <button type="submit" class="btn auth-submit-button">Submit</button>
+                <button type="reset" class="client-update-reset auth-reset-button">Reset</button>
+            </div>
+
+            <p id="signupMessage" class="client-update-message" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
+
+<div id="loginModal" class="auth-modal" aria-hidden="true">
+    <div class="auth-modal-panel" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+        <button type="button" class="auth-modal-close" data-close-modal aria-label="Close login form">&times;</button>
+        <div class="auth-modal-heading">
+            <span class="client-update-badge">Account Access</span>
+            <h2 id="loginTitle">Login</h2>
+        </div>
+
+        <form id="loginForm" class="auth-form" novalidate>
+            <div class="auth-field">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Enter email address" required>
+                <span class="field-error" id="loginEmailError"></span>
+            </div>
+
+            <div class="auth-field">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Enter password" required>
+                <span class="field-error" id="loginPasswordError"></span>
+            </div>
+
+            <div class="auth-actions">
+                <button type="submit" class="btn auth-submit-button">Submit</button>
+                <button type="reset" class="client-update-reset auth-reset-button">Reset</button>
+            </div>
+
+            <p id="loginMessage" class="client-update-message" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
+
 <footer>
     <div class="footer-container">
         <p>&copy; 2026 Secure Fund Group</p>
@@ -183,6 +273,370 @@
 
     showSlide(currentSlide);
     startAutoSlide();
+
+    const openSignupButton = document.getElementById("openSignupButton");
+    const openLoginButton = document.getElementById("openLoginButton");
+    const signupModal = document.getElementById("signupModal");
+    const loginModal = document.getElementById("loginModal");
+    const signupForm = document.getElementById("signupForm");
+    const loginForm = document.getElementById("loginForm");
+    const signupMessage = document.getElementById("signupMessage");
+    const loginMessage = document.getElementById("loginMessage");
+    const agentAccessLink = document.getElementById("agentAccessLink");
+    const adminAccessLink = document.getElementById("adminAccessLink");
+
+    function openAuthModal(modal) {
+        closeAuthModals();
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        const firstInput = modal.querySelector("input, select");
+
+        if (firstInput) {
+            firstInput.focus();
+        }
+    }
+
+    function closeAuthModals() {
+        document.querySelectorAll(".auth-modal").forEach((modal) => {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+        });
+    }
+
+    function setAuthMessage(element, message, type) {
+        element.textContent = message;
+        element.className = "client-update-message";
+
+        if (type) {
+            element.classList.add(type);
+        }
+    }
+
+    function setAuthFieldError(fieldId, message) {
+        const errorElement = document.getElementById(fieldId + "Error");
+
+        if (errorElement) {
+            errorElement.textContent = message;
+        }
+    }
+
+    function clearAuthFieldErrors(form) {
+        form.querySelectorAll(".field-error").forEach((errorElement) => {
+            errorElement.textContent = "";
+        });
+    }
+
+    function parseJsonSafely(value) {
+        if (typeof value !== "string") {
+            return value;
+        }
+
+        try {
+            return JSON.parse(value);
+        } catch (error) {
+            return value;
+        }
+    }
+
+    async function readApiResponse(response) {
+        const rawText = await response.text();
+        let parsedData = parseJsonSafely(rawText);
+
+        if (parsedData && typeof parsedData === "object" && Object.prototype.hasOwnProperty.call(parsedData, "body")) {
+            parsedData = parseJsonSafely(parsedData.body);
+        }
+
+        return parsedData;
+    }
+
+    function getResponseMessage(responseData, fallbackMessage) {
+        if (!responseData) {
+            return fallbackMessage;
+        }
+
+        if (typeof responseData === "string" && responseData.trim()) {
+            return responseData;
+        }
+
+        if (responseData.message) {
+            return responseData.message;
+        }
+
+        if (responseData.error) {
+            return responseData.error;
+        }
+
+        return fallbackMessage;
+    }
+
+    function getResponseValue(responseData, key) {
+        if (!responseData || typeof responseData !== "object") {
+            return "";
+        }
+
+        if (responseData[key] != null) {
+            return String(responseData[key]);
+        }
+
+        if (responseData.user && responseData.user[key] != null) {
+            return String(responseData.user[key]);
+        }
+
+        if (responseData.data && responseData.data[key] != null) {
+            return String(responseData.data[key]);
+        }
+
+        return "";
+    }
+
+    function hideRoleAccessLinks() {
+        agentAccessLink.classList.remove("is-visible");
+        adminAccessLink.classList.remove("is-visible");
+    }
+
+    function applyLoggedInAccess(role, approvalKey) {
+        const normalizedRole = String(role || "").toLowerCase();
+        const normalizedKey = String(approvalKey || "").toLowerCase();
+
+        hideRoleAccessLinks();
+
+        if (normalizedRole === "agent" && normalizedKey === "agentapprove") {
+            agentAccessLink.classList.add("is-visible");
+            return "pages/agent_client.html";
+        }
+
+        if (normalizedRole === "admin" && normalizedKey === "approveadmin") {
+            adminAccessLink.classList.add("is-visible");
+            return "pages/client_update.html";
+        }
+
+        return "";
+    }
+
+    function restoreSavedAccess() {
+        const role = sessionStorage.getItem("aadhiRole");
+        const approvalKey = sessionStorage.getItem("aadhiApprovalKey");
+
+        if (role && approvalKey) {
+            applyLoggedInAccess(role, approvalKey);
+        }
+    }
+
+    function validateSignupForm() {
+        let isValid = true;
+        const name = document.getElementById("signupName").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+        const password = document.getElementById("signupPassword").value;
+        const role = document.getElementById("signupRole").value;
+        const mobile = document.getElementById("signupMobile").value.trim();
+
+        clearAuthFieldErrors(signupForm);
+
+        if (name.length < 2) {
+            setAuthFieldError("signupName", "Please enter at least 2 characters.");
+            isValid = false;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setAuthFieldError("signupEmail", "Please enter a valid email address.");
+            isValid = false;
+        }
+
+        if (password.length < 6) {
+            setAuthFieldError("signupPassword", "Password must be at least 6 characters.");
+            isValid = false;
+        }
+
+        if (!role) {
+            setAuthFieldError("signupRole", "Please select a role.");
+            isValid = false;
+        }
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+            setAuthFieldError("signupMobile", "Please enter a valid 10 digit mobile number.");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            setAuthMessage(signupMessage, "Please correct the highlighted fields and submit again.", "error");
+        }
+
+        return isValid;
+    }
+
+    function validateLoginForm() {
+        let isValid = true;
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        clearAuthFieldErrors(loginForm);
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setAuthFieldError("loginEmail", "Please enter a valid email address.");
+            isValid = false;
+        }
+
+        if (!password) {
+            setAuthFieldError("loginPassword", "Please enter password.");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            setAuthMessage(loginMessage, "Please correct the highlighted fields and submit again.", "error");
+        }
+
+        return isValid;
+    }
+
+    openSignupButton.addEventListener("click", () => {
+        openAuthModal(signupModal);
+    });
+
+    openLoginButton.addEventListener("click", () => {
+        openAuthModal(loginModal);
+    });
+
+    document.querySelectorAll("[data-close-modal]").forEach((button) => {
+        button.addEventListener("click", closeAuthModals);
+    });
+
+    document.querySelectorAll(".auth-modal").forEach((modal) => {
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeAuthModals();
+            }
+        });
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeAuthModals();
+        }
+    });
+
+    signupForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!validateSignupForm()) {
+            return;
+        }
+
+        const submitButton = signupForm.querySelector('button[type="submit"]');
+        const payload = {
+            name: document.getElementById("signupName").value.trim(),
+            email: document.getElementById("signupEmail").value.trim(),
+            password: document.getElementById("signupPassword").value,
+            role: document.getElementById("signupRole").value,
+            mobile: document.getElementById("signupMobile").value.trim()
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+        setAuthMessage(signupMessage, "Creating account...", "info");
+
+        try {
+            const response = await fetch(
+                "https://wu7j38uru7.execute-api.us-east-1.amazonaws.com/default/aadhi_signup",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }
+            );
+            const responseData = await readApiResponse(response);
+
+            if (!response.ok) {
+                throw new Error(getResponseMessage(responseData, "Unable to create account. Please try again."));
+            }
+
+            setAuthMessage(signupMessage, getResponseMessage(responseData, "Account created successfully."), "success");
+            signupForm.reset();
+        } catch (error) {
+            setAuthMessage(signupMessage, error.message || "Something went wrong while creating the account.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit";
+        }
+    });
+
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!validateLoginForm()) {
+            return;
+        }
+
+        const submitButton = loginForm.querySelector('button[type="submit"]');
+        const payload = {
+            email: document.getElementById("loginEmail").value.trim(),
+            password: document.getElementById("loginPassword").value
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+        setAuthMessage(loginMessage, "Checking login details...", "info");
+
+        try {
+            const response = await fetch(
+                "https://kgp3ajt0zb.execute-api.us-east-1.amazonaws.com/default/aadhi_login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }
+            );
+            const responseData = await readApiResponse(response);
+
+            if (!response.ok) {
+                throw new Error(getResponseMessage(responseData, "Unable to login. Please check your email and password."));
+            }
+
+            const role = getResponseValue(responseData, "role");
+            const approvalKey = getResponseValue(responseData, "key");
+            const nextPage = applyLoggedInAccess(role, approvalKey);
+
+            if (!nextPage) {
+                sessionStorage.removeItem("aadhiRole");
+                sessionStorage.removeItem("aadhiApprovalKey");
+                throw new Error("Login successful, but this account is not approved for agent or admin access.");
+            }
+
+            sessionStorage.setItem("aadhiRole", role);
+            sessionStorage.setItem("aadhiApprovalKey", approvalKey);
+            setAuthMessage(loginMessage, getResponseMessage(responseData, "Login successful. Redirecting..."), "success");
+            loginForm.reset();
+
+            window.setTimeout(() => {
+                window.location.href = nextPage;
+            }, 800);
+        } catch (error) {
+            hideRoleAccessLinks();
+            setAuthMessage(loginMessage, error.message || "Something went wrong while logging in.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit";
+        }
+    });
+
+    signupForm.addEventListener("reset", () => {
+        window.setTimeout(() => {
+            clearAuthFieldErrors(signupForm);
+            setAuthMessage(signupMessage, "", "");
+        }, 0);
+    });
+
+    loginForm.addEventListener("reset", () => {
+        window.setTimeout(() => {
+            clearAuthFieldErrors(loginForm);
+            setAuthMessage(loginMessage, "", "");
+        }, 0);
+    });
+
+    restoreSavedAccess();
 </script>
 
 </body>

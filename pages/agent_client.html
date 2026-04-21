@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Client Enquiry</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="client-update-page">
+<header>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="client_update.html">Admin</a>
+    </nav>
+</header>
+
+<main class="client-update-main agent-client-main">
+    <section class="client-update-card">
+        <div class="client-update-heading">
+            <span class="client-update-badge">Agent Client</span>
+            <h1>Create New Enquiry</h1>
+            <p>Submit new client enquiry details for financial and insurance planning.</p>
+        </div>
+
+        <form id="agentClientForm" class="client-update-form" novalidate>
+            <div class="client-update-grid">
+                <div class="client-update-field">
+                    <label for="name">First Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter first name" required minlength="2">
+                    <span class="field-error" id="nameError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter last name" required minlength="2">
+                    <span class="field-error" id="last_nameError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="dob">DOB</label>
+                    <input type="date" id="dob" name="dob" required>
+                    <span class="field-error" id="dobError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                    <span class="field-error" id="emailError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Aadhi Nandhi co op credit society">Aadhi Nandhi co op credit society</option>
+                        <option value="Shubhchintan chits pvt ltd">Shubhchintan chits pvt ltd</option>
+                        <option value="Mutual fund">Mutual fund</option>
+                        <option value="Life Insurance">Life Insurance</option>
+                        <option value="Generall Insurance">Generall Insurance</option>
+                        <option value="Health insurance">Health insurance</option>
+                        <option value="Group term life">Group term life</option>
+                        <option value="Group mediclaim plan">Group mediclaim plan</option>
+                        <option value="Travel insurance">Travel insurance</option>
+                    </select>
+                    <span class="field-error" id="categoryError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="mobile">Mobile</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter 10 digit mobile number" inputmode="numeric" maxlength="10" required>
+                    <span class="field-error" id="mobileError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="married">Married</label>
+                    <select id="married" name="married">
+                        <option value="">Select marital status</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <span class="field-error" id="marriedError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="marriege_date">Marriage Date</label>
+                    <input type="date" id="marriege_date" name="marriege_date">
+                    <span class="field-error" id="marriege_dateError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="total_summasured">Total Sum Assured</label>
+                    <input type="number" id="total_summasured" name="total_summasured" placeholder="Enter total sum assured" min="0" step="1">
+                    <span class="field-error" id="total_summasuredError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="total_primium">Total Premium</label>
+                    <input type="number" id="total_primium" name="total_primium" placeholder="Enter total premium" min="0" step="1">
+                    <span class="field-error" id="total_primiumError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="total_chitfund_investment">Total Chit Fund Investment</label>
+                    <input type="number" id="total_chitfund_investment" name="total_chitfund_investment" placeholder="Enter chit fund investment" min="0" step="1">
+                    <span class="field-error" id="total_chitfund_investmentError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="total_mutulfund_sip">Total Mutual Fund SIP</label>
+                    <input type="number" id="total_mutulfund_sip" name="total_mutulfund_sip" placeholder="Enter mutual fund SIP" min="0" step="1">
+                    <span class="field-error" id="total_mutulfund_sipError"></span>
+                </div>
+
+                <div class="client-update-field">
+                    <label for="family_dependents">Family Dependents</label>
+                    <input type="number" id="family_dependents" name="family_dependents" placeholder="Enter number of dependents" min="0" step="1">
+                    <span class="field-error" id="family_dependentsError"></span>
+                </div>
+            </div>
+
+            <div class="client-update-actions">
+                <button type="submit" class="btn client-update-submit">Submit</button>
+                <button type="reset" class="client-update-reset">Reset</button>
+            </div>
+
+            <p id="agentFormMessage" class="client-update-message" aria-live="polite"></p>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <p>&copy; 2026 Secure Fund Group</p>
+        <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const agentClientForm = document.getElementById("agentClientForm");
+    const agentFormMessage = document.getElementById("agentFormMessage");
+    const marriedField = document.getElementById("married");
+    const marriageDateField = document.getElementById("marriege_date");
+    const numberFieldIds = [
+        "total_summasured",
+        "total_primium",
+        "total_chitfund_investment",
+        "total_mutulfund_sip",
+        "family_dependents"
+    ];
+
+    function setAgentFormMessage(message, type) {
+        agentFormMessage.textContent = message;
+        agentFormMessage.className = "client-update-message";
+
+        if (type) {
+            agentFormMessage.classList.add(type);
+        }
+    }
+
+    function setFieldError(fieldId, message) {
+        const errorElement = document.getElementById(fieldId + "Error");
+
+        if (errorElement) {
+            errorElement.textContent = message;
+        }
+    }
+
+    function clearFieldErrors() {
+        document.querySelectorAll(".field-error").forEach(function (errorElement) {
+            errorElement.textContent = "";
+        });
+    }
+
+    function parseJsonSafely(value) {
+        if (typeof value !== "string") {
+            return value;
+        }
+
+        try {
+            return JSON.parse(value);
+        } catch (error) {
+            return value;
+        }
+    }
+
+    async function readApiResponse(response) {
+        const rawText = await response.text();
+        let parsedData = parseJsonSafely(rawText);
+
+        if (parsedData && typeof parsedData === "object" && Object.prototype.hasOwnProperty.call(parsedData, "body")) {
+            parsedData = parseJsonSafely(parsedData.body);
+        }
+
+        return parsedData;
+    }
+
+    function getResponseMessage(responseData, fallbackMessage) {
+        if (!responseData) {
+            return fallbackMessage;
+        }
+
+        if (typeof responseData === "string" && responseData.trim()) {
+            return responseData;
+        }
+
+        if (responseData.message) {
+            return responseData.message;
+        }
+
+        if (responseData.error) {
+            return responseData.error;
+        }
+
+        return fallbackMessage;
+    }
+
+    function isFutureDate(dateValue) {
+        if (!dateValue) {
+            return false;
+        }
+
+        const selectedDate = new Date(dateValue + "T00:00:00");
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        return selectedDate > today;
+    }
+
+    function updateMarriageDateState() {
+        const isMarried = marriedField.value === "true";
+
+        marriageDateField.required = false;
+        marriageDateField.disabled = marriedField.value === "false";
+
+        if (!isMarried) {
+            marriageDateField.value = "";
+            setFieldError("marriege_date", "");
+        }
+    }
+
+    function validateAgentForm() {
+        let isValid = true;
+        clearFieldErrors();
+
+        const name = document.getElementById("name").value.trim();
+        const lastName = document.getElementById("last_name").value.trim();
+        const dob = document.getElementById("dob").value;
+        const email = document.getElementById("email").value.trim();
+        const category = document.getElementById("category").value;
+        const mobile = document.getElementById("mobile").value.trim();
+        const married = marriedField.value;
+        const marriageDate = marriageDateField.value;
+
+        if (name.length < 2) {
+            setFieldError("name", "Please enter at least 2 characters.");
+            isValid = false;
+        }
+
+        if (lastName.length < 2) {
+            setFieldError("last_name", "Please enter at least 2 characters.");
+            isValid = false;
+        }
+
+        if (!dob) {
+            setFieldError("dob", "Please select date of birth.");
+            isValid = false;
+        } else if (isFutureDate(dob)) {
+            setFieldError("dob", "Date of birth cannot be in the future.");
+            isValid = false;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setFieldError("email", "Please enter a valid email address.");
+            isValid = false;
+        }
+
+        if (!category) {
+            setFieldError("category", "Please select a category.");
+            isValid = false;
+        }
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+            setFieldError("mobile", "Please enter a valid 10 digit mobile number.");
+            isValid = false;
+        }
+
+        if (married !== "" && married !== "true" && married !== "false") {
+            setFieldError("married", "Please select a valid marital status.");
+            isValid = false;
+        }
+
+        if (marriageDate && isFutureDate(marriageDate)) {
+            setFieldError("marriege_date", "Marriage date cannot be in the future.");
+            isValid = false;
+        }
+
+        numberFieldIds.forEach(function (fieldId) {
+            const field = document.getElementById(fieldId);
+            const value = field.value;
+            const numberValue = Number(value);
+
+            if (value !== "" && (Number.isNaN(numberValue) || numberValue < 0)) {
+                setFieldError(fieldId, "Please enter a valid non-negative number.");
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            setAgentFormMessage("Please correct the highlighted fields and submit again.", "error");
+        }
+
+        return isValid;
+    }
+
+    function optionalNumber(fieldId) {
+        const value = document.getElementById(fieldId).value;
+
+        return value === "" ? null : Number(value);
+    }
+
+    function buildPayload() {
+        const payload = {
+            name: document.getElementById("name").value.trim(),
+            last_name: document.getElementById("last_name").value.trim(),
+            dob: document.getElementById("dob").value,
+            email: document.getElementById("email").value.trim(),
+            category: document.getElementById("category").value,
+            mobile: document.getElementById("mobile").value.trim(),
+            marriege_date: marriageDateField.value || null,
+            total_summasured: optionalNumber("total_summasured"),
+            total_primium: optionalNumber("total_primium"),
+            total_chitfund_investment: optionalNumber("total_chitfund_investment"),
+            total_mutulfund_sip: optionalNumber("total_mutulfund_sip"),
+            family_dependents: optionalNumber("family_dependents")
+        };
+
+        if (marriedField.value !== "") {
+            payload.married = marriedField.value === "true";
+        } else {
+            payload.married = null;
+        }
+
+        return payload;
+    }
+
+    marriedField.addEventListener("change", updateMarriageDateState);
+
+    agentClientForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (!validateAgentForm()) {
+            return;
+        }
+
+        const submitButton = agentClientForm.querySelector('button[type="submit"]');
+        const payload = buildPayload();
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+        setAgentFormMessage("Submitting enquiry details...", "info");
+
+        try {
+            const response = await fetch(
+                "https://sby4mbax9l.execute-api.us-east-1.amazonaws.com/default/aadhi_insert_new_enquiry",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }
+            );
+            const responseData = await readApiResponse(response);
+
+            if (!response.ok) {
+                throw new Error(getResponseMessage(responseData, "Unable to create enquiry. Please try again."));
+            }
+
+            setAgentFormMessage(getResponseMessage(responseData, "Enquiry created successfully."), "success");
+            agentClientForm.reset();
+            updateMarriageDateState();
+        } catch (error) {
+            setAgentFormMessage(error.message || "Something went wrong while creating the enquiry.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit";
+        }
+    });
+
+    agentClientForm.addEventListener("reset", function () {
+        window.setTimeout(function () {
+            clearFieldErrors();
+            setAgentFormMessage("", "");
+            updateMarriageDateState();
+        }, 0);
+    });
+
+    updateMarriageDateState();
+</script>
+</body>
+</html>

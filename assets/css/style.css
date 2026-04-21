@@ -2389,6 +2389,42 @@ body.home-page {
     font-weight: 700;
 }
 
+.home-auth-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 18px;
+}
+
+.home-auth-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    border-radius: 999px;
+    background: transparent;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.home-auth-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.home-auth-button-primary {
+    border-color: #fbbf24;
+    background: #fbbf24;
+    color: #0f2f5b;
+}
+
+.home-auth-button-primary:hover {
+    background: #f59e0b;
+}
+
 .home-main {
     width: min(1180px, calc(100% - 32px));
     margin: 0 auto;
@@ -2460,6 +2496,123 @@ body.home-page {
     color: #ffffff;
     text-decoration: none;
     font-weight: 700;
+}
+
+.role-access-link {
+    display: none;
+}
+
+.role-access-link.is-visible {
+    display: inline-flex;
+}
+
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 47, 91, 0.62);
+}
+
+.auth-modal.is-open {
+    display: flex;
+}
+
+.auth-modal-panel {
+    position: relative;
+    width: min(460px, 100%);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 24px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 47, 91, 0.12);
+    box-shadow: 0 24px 60px rgba(8, 31, 61, 0.26);
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: #e8f1ff;
+    color: #0f2f5b;
+    font-size: 1.45rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.auth-modal-close:hover {
+    background: #d7e9ff;
+}
+
+.auth-modal-heading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.auth-modal-heading h2 {
+    margin: 0;
+    color: #0f2f5b;
+}
+
+.auth-form {
+    display: grid;
+    gap: 16px;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-field label {
+    margin-bottom: 8px;
+    color: #0f2f5b;
+    font-weight: 700;
+}
+
+.auth-field input,
+.auth-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #c7d8ee;
+    border-radius: 14px;
+    background: #ffffff;
+    font: inherit;
+}
+
+.auth-field input:focus,
+.auth-field select:focus {
+    outline: none;
+    border-color: #0a7abf;
+    box-shadow: 0 0 0 3px rgba(10, 122, 191, 0.15);
+}
+
+.auth-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.auth-submit-button,
+.auth-reset-button {
+    min-width: 120px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 1rem;
+}
+
+.auth-submit-button:disabled {
+    opacity: 0.7;
+    cursor: wait;
 }
 
 .home-slider-card {
@@ -2609,6 +2762,11 @@ body.home-page {
         margin-right: 14px;
     }
 
+    .home-auth-actions {
+        margin-left: 0;
+        margin-top: 12px;
+    }
+
     .home-hero h1 {
         font-size: 2rem;
     }
@@ -2620,6 +2778,24 @@ body.home-page {
 
     .slider {
         height: 260px;
+    }
+
+    .auth-modal {
+        align-items: flex-start;
+        padding: 14px;
+    }
+
+    .auth-modal-panel {
+        padding: 24px 18px;
+    }
+
+    .auth-actions {
+        flex-direction: column;
+    }
+
+    .auth-submit-button,
+    .auth-reset-button {
+        width: 100%;
     }
 }
 
@@ -3007,6 +3183,21 @@ body.client-update-page {
     outline: none;
     border-color: #0a7abf;
     box-shadow: 0 0 0 3px rgba(10, 122, 191, 0.15);
+}
+
+.client-update-field input:disabled {
+    background: #eef3f8;
+    color: #8393a4;
+    cursor: not-allowed;
+}
+
+.field-error {
+    min-height: 18px;
+    margin-top: 6px;
+    color: #c62828;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.35;
 }
 
 .client-update-actions {
