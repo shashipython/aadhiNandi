@@ -513,7 +513,7 @@
         return "";
     }
 
-    async function checkAgentApproval(agentId) {
+    async function checkAgentApproval(email) {
         const response = await fetch(
             "https://tu8s9wuor6.execute-api.us-east-1.amazonaws.com/aadhi_check_agent_api_deploy/aadhi_check_agent_aproval",
             {
@@ -522,7 +522,7 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    id: agentId
+                    email: email
                 })
             }
         );
@@ -760,14 +760,8 @@
             let approvalKey = getResponseValue(responseData, "key");
 
             if (role === "agent") {
-                const agentId = getResponseValue(responseData, "id");
-
-                if (!agentId) {
-                    throw new Error("Login successful, but agent id was not returned for approval check.");
-                }
-
                 setAuthMessage(loginMessage, "Login successful. Checking agent approval status...", "info");
-                const approvalResult = await checkAgentApproval(Number(agentId));
+                const approvalResult = await checkAgentApproval(payload.email);
                 approvalKey = approvalResult.approved ? "true" : "false";
             }
 
