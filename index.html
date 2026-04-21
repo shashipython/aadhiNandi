@@ -29,17 +29,14 @@
             <a href="pages/services.html">Services</a>
             <a href="pages/contact.html">Contact</a>
             <a href="pages/agent_client.html" id="agentAccessLink" class="home-outline-btn role-access-link">Agent</a>
+            <a href="pages/client_update.html" id="adminAccessLink" class="home-outline-btn role-access-link">Admin</a>
             <span class="home-auth-actions">
                 <button type="button" id="openSignupButton" class="home-auth-button">Signup</button>
                 <button type="button" id="openLoginButton" class="home-auth-button home-auth-button-primary">Login</button>
-                <a href="pages/client_update.html" id="adminAccessLink" class="home-auth-button">Admin</a>
             </span>
         </nav>
     </div>
 </header>
-            </nav> <a href="pages/client_update.html" class="home-outline-btn">Admin</a>
-        </div>
-    </header>
 
     <!-- PROVIDED CONTENT SECTIONS -->
     <main class="namo-landing">
@@ -352,25 +349,27 @@
         autoSlide = setInterval(nextSlide, 3000);
     }
 
-    nextBtn.addEventListener("click", () => {
-        nextSlide();
-        startAutoSlide();
-    });
-
-    prevBtn.addEventListener("click", () => {
-        prevSlide();
-        startAutoSlide();
-    });
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-            showSlide(index);
+    if (slides.length && nextBtn && prevBtn) {
+        nextBtn.addEventListener("click", () => {
+            nextSlide();
             startAutoSlide();
         });
-    });
 
-    showSlide(currentSlide);
-    startAutoSlide();
+        prevBtn.addEventListener("click", () => {
+            prevSlide();
+            startAutoSlide();
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                showSlide(index);
+                startAutoSlide();
+            });
+        });
+
+        showSlide(currentSlide);
+        startAutoSlide();
+    }
 
     const openSignupButton = document.getElementById("openSignupButton");
     const openLoginButton = document.getElementById("openLoginButton");
@@ -586,33 +585,45 @@
         return isValid;
     }
 
-    openSignupButton.addEventListener("click", () => {
-        openAuthModal(signupModal);
-    });
+    if (
+        openSignupButton &&
+        openLoginButton &&
+        signupModal &&
+        loginModal &&
+        signupForm &&
+        loginForm &&
+        signupMessage &&
+        loginMessage &&
+        agentAccessLink &&
+        adminAccessLink
+    ) {
+        openSignupButton.addEventListener("click", () => {
+            openAuthModal(signupModal);
+        });
 
-    openLoginButton.addEventListener("click", () => {
-        openAuthModal(loginModal);
-    });
+        openLoginButton.addEventListener("click", () => {
+            openAuthModal(loginModal);
+        });
 
-    document.querySelectorAll("[data-close-modal]").forEach((button) => {
-        button.addEventListener("click", closeAuthModals);
-    });
+        document.querySelectorAll("[data-close-modal]").forEach((button) => {
+            button.addEventListener("click", closeAuthModals);
+        });
 
-    document.querySelectorAll(".auth-modal").forEach((modal) => {
-        modal.addEventListener("click", (event) => {
-            if (event.target === modal) {
+        document.querySelectorAll(".auth-modal").forEach((modal) => {
+            modal.addEventListener("click", (event) => {
+                if (event.target === modal) {
+                    closeAuthModals();
+                }
+            });
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
                 closeAuthModals();
             }
         });
-    });
 
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            closeAuthModals();
-        }
-    });
-
-    signupForm.addEventListener("submit", async (event) => {
+        signupForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         if (!validateSignupForm()) {
@@ -657,9 +668,9 @@
             submitButton.disabled = false;
             submitButton.textContent = "Submit";
         }
-    });
+        });
 
-    loginForm.addEventListener("submit", async (event) => {
+        loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         if (!validateLoginForm()) {
@@ -718,23 +729,24 @@
             submitButton.disabled = false;
             submitButton.textContent = "Submit";
         }
-    });
+        });
 
-    signupForm.addEventListener("reset", () => {
-        window.setTimeout(() => {
-            clearAuthFieldErrors(signupForm);
-            setAuthMessage(signupMessage, "", "");
-        }, 0);
-    });
+        signupForm.addEventListener("reset", () => {
+            window.setTimeout(() => {
+                clearAuthFieldErrors(signupForm);
+                setAuthMessage(signupMessage, "", "");
+            }, 0);
+        });
 
-    loginForm.addEventListener("reset", () => {
-        window.setTimeout(() => {
-            clearAuthFieldErrors(loginForm);
-            setAuthMessage(loginMessage, "", "");
-        }, 0);
-    });
+        loginForm.addEventListener("reset", () => {
+            window.setTimeout(() => {
+                clearAuthFieldErrors(loginForm);
+                setAuthMessage(loginMessage, "", "");
+            }, 0);
+        });
 
-    restoreSavedAccess();
+        restoreSavedAccess();
+    }
 </script>
 
         <!-- WHATSAPP FLOAT (SAME TAB FIX) -->

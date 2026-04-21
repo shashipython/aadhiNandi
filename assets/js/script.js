@@ -3,151 +3,107 @@
    SIP + HEALTH INSURANCE
 ========================= */
 
-console.log("Fintech App Loaded 🚀");
+console.log("Fintech App Loaded");
 
 /* =========================
    1. SMOOTH SCROLL
 ========================= */
-document.querySelectorAll("a[href^='#']").forEach(link => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) target.scrollIntoView({ behavior: "smooth" });
-  });
+document.querySelectorAll("a[href^='#']").forEach(function (link) {
+    link.addEventListener("click", function (event) {
+        const targetSelector = link.getAttribute("href");
+
+        if (!targetSelector || targetSelector === "#") {
+            return;
+        }
+
+        const target = document.querySelector(targetSelector);
+
+        if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    });
 });
 
 /* =========================
-   2. SIP CALCULATOR (REAL FORMULA)
-   FV = P × [ ( (1+r)^n - 1 ) / r ] × (1+r)
+   2. SIP CALCULATOR
 ========================= */
+function calculateSIP() {
+    const amountInput = document.getElementById("sipAmount") || document.getElementById("monthly");
+    const rateInput = document.getElementById("sipRate") || document.getElementById("rate");
+    const yearsInput = document.getElementById("sipYears") || document.getElementById("time");
+    const resultEl = document.getElementById("sipResult") || document.getElementById("result");
 
-  let years = parseFloat(document.getElementById("sipYears")?.value || 0);
-  
-  const resultEl = document.getElementById("sipResult");
-  if (!resultEl) return; // Not on this page
-  
-  if (!P || !annualRate || !years) {
-    alert("Please fill all SIP fields");
-    return;
-  }
+    if (!amountInput || !rateInput || !yearsInput || !resultEl) {
+        return;
+    }
 
-  let r = annualRate / 100 / 12;
-  let n = years * 12;
-  let fv = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
-  resultEl.innerText = "Future Value: ₹ " + fv.toFixed(0);
+    const amount = parseFloat(amountInput.value);
+    const annualRate = parseFloat(rateInput.value);
+    const years = parseFloat(yearsInput.value);
+
+    if (!amount || !annualRate || !years) {
+        resultEl.textContent = "Please fill all fields";
+        return;
+    }
+
+    const monthlyRate = annualRate / 100 / 12;
+    const months = years * 12;
+    const futureValue = amount * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+
+    resultEl.textContent = "Future Value: Rs. " + futureValue.toFixed(2);
 }
 
 function calculateSIPMutual() {
-  // Mutual fund
+    calculateSIP();
+}
 
 /* =========================
-   3. HEALTH INSURANCE CALCULATOR (SIMPLE LOGIC)
+   3. HEALTH INSURANCE CALCULATOR
 ========================= */
 function calculateHealthInsurance() {
-  let age = parseFloat(document.getElementById("age").value);
-  let cover = parseFloat(document.getElementById("cover").value);
+    const ageInput = document.getElementById("age");
+    const coverInput = document.getElementById("cover");
+    const resultEl = document.getElementById("healthResult");
 
-  if (!age || !cover) {
-    alert("Please enter age and cover amount");
-    return;
-  }
+    if (!ageInput || !coverInput || !resultEl) {
+        return;
+    }
 
-  // Basic premium logic (demo model)
-  let baseRate = 0.02; // 2%
-  let ageFactor = age > 40 ? 1.5 : 1;
+    const age = parseFloat(ageInput.value);
+    const cover = parseFloat(coverInput.value);
 
-  let premium = cover * baseRate * ageFactor;
+    if (!age || !cover) {
+        resultEl.textContent = "Please fill all fields";
+        return;
+    }
 
-  document.getElementById("healthResult").innerText =
-    "Estimated Premium: ₹ " + premium.toFixed(0) + " / year";
+    const premium = cover * 0.02 + age * 50;
+    resultEl.textContent = "Estimated Premium: Rs. " + premium.toFixed(2);
 }
 
 /* =========================
    4. WHATSAPP AUTO MESSAGE
 ========================= */
 function openWhatsApp(type) {
-  let number = "919999999999"; // change your number
+    const number = "919999999999";
+    let message = "Hi, I need financial advice.";
 
-  let message = "";
+    if (type === "sip") {
+        message = "Hi, I want help with SIP investment.";
+    } else if (type === "health") {
+        message = "Hi, I want health insurance details.";
+    }
 
-  if (type === "sip") {
-    message = "Hi, I want help with SIP investment.";
-  } else if (type === "health") {
-    message = "Hi, I want health insurance details.";
-  } else {
-    message = "Hi, I need financial advice.";
-  }
-
-  let url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
+    const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
 }
 
 /* =========================
    5. BUTTON DEBUG
 ========================= */
-document.querySelectorAll(".btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    console.log("Clicked:", btn.innerText);
-  });
+document.querySelectorAll(".btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+        console.log("Clicked:", button.innerText);
+    });
 });
-function calculateSIP() {
-    let P = document.getElementById("monthly").value;
-    let r = document.getElementById("rate").value / 100 / 12;
-    let n = document.getElementById("time").value * 12;
-
-    let futureValue = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-
-    document.getElementById("result").innerHTML =
-        "Future Value: ₹ " + Math.round(futureValue);
-}
-function calculateSIP() {
-    let P = parseFloat(document.getElementById("monthly").value);
-    let r = parseFloat(document.getElementById("rate").value) / 100 / 12;
-    let n = parseFloat(document.getElementById("time").value) * 12;
-
-    if (isNaN(P) || isNaN(r) || isNaN(n)) {
-        document.getElementById("result").innerHTML = "Please enter all values!";
-        return;
-    }
-
-    let futureValue = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-
-    document.getElementById("result").innerHTML =
-        "Future Value: ₹ " + Math.round(futureValue);
-}
-// SIP Calculator
-function calculateSIP() {
-    let amount = document.getElementById("sipAmount").value;
-    let rate = document.getElementById("sipRate").value;
-    let years = document.getElementById("sipYears").value;
-
-    if (amount === "" || rate === "" || years === "") {
-        document.getElementById("sipResult").innerText = "Please fill all fields";
-        return;
-    }
-
-    let monthlyRate = rate / 100 / 12;
-    let months = years * 12;
-
-    let futureValue = amount * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
-
-    document.getElementById("sipResult").innerText =
-        "Future Value: ₹ " + futureValue.toFixed(2);
-}
-
-
-// Health Insurance Calculator
-function calculateHealthInsurance() {
-    let age = document.getElementById("age").value;
-    let cover = document.getElementById("cover").value;
-
-    if (age === "" || cover === "") {
-        document.getElementById("healthResult").innerText = "Please fill all fields";
-        return;
-    }
-
-    let premium = (cover * 0.02) + (age * 50);
-
-    document.getElementById("healthResult").innerText =
-        "Estimated Premium: ₹ " + premium.toFixed(2);
-}
