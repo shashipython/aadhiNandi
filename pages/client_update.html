@@ -278,6 +278,12 @@
             return fallbackMessage;
         }
 
+        const duplicateMessage = getDuplicateValueMessage(responseData);
+
+        if (duplicateMessage) {
+            return duplicateMessage;
+        }
+
         if (typeof responseData === "string" && responseData.trim()) {
             return responseData;
         }
@@ -291,6 +297,28 @@
         }
 
         return fallbackMessage;
+    }
+
+    function getDuplicateValueMessage(responseData) {
+        const responseText = typeof responseData === "string"
+            ? responseData
+            : JSON.stringify(responseData || {});
+        const normalizedText = responseText.toLowerCase();
+
+        if (!normalizedText.includes("duplicate key") && !normalizedText.includes("already exists")) {
+            return "";
+        }
+
+        const fieldMatch = responseText.match(/Key \(([^)]+)\)=/i);
+        const valueMatch = responseText.match(/=\(([^)]+)\) already exists/i);
+        const fieldName = fieldMatch && fieldMatch[1] ? fieldMatch[1].replace(/_/g, " ") : "value";
+        const fieldValue = valueMatch && valueMatch[1] ? valueMatch[1] : "";
+
+        if (fieldValue) {
+            return "This " + fieldName + " (" + fieldValue + ") already exists. Please use a different " + fieldName + ".";
+        }
+
+        return "This " + fieldName + " already exists. Please use a different " + fieldName + ".";
     }
 
     function convertFileToBase64(file) {
