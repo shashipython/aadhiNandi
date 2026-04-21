@@ -513,7 +513,7 @@
         return "";
     }
 
-    async function checkAgentApproval(email) {
+    async function checkAgentApproval(agentId) {
         const response = await fetch(
             "https://tu8s9wuor6.execute-api.us-east-1.amazonaws.com/aadhi_check_agent_api_deploy/aadhi_check_agent_aproval",
             {
@@ -522,8 +522,7 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email: email,
-                    role: "agent"
+                    id: agentId
                 })
             }
         );
@@ -535,7 +534,7 @@
 
         return {
             responseData: responseData,
-            approvalStatus: getAgentApprovalStatus(responseData)
+            approved: responseData && responseData.approved === true
         };
     }
 
@@ -550,10 +549,7 @@
 
         hideRoleAccessLinks();
 
-        if (
-            normalizedRole === "agent" &&
-            (normalizedKey === "agentapprove" || normalizedKey === "approved" || normalizedKey === "approve" || normalizedKey === "true" || normalizedKey === "yes")
-        ) {
+        if (normalizedRole === "agent" && normalizedKey === "true") {
             agentAccessLink.classList.add("is-visible");
             return "pages/agent_client.html";
         }
@@ -764,9 +760,15 @@
             let approvalKey = getResponseValue(responseData, "key");
 
             if (role === "agent") {
+                const agentId = getResponseValue(responseData, "id");
+
+                if (!agentId) {
+                    throw new Error("Login successful, but agent id was not returned for approval check.");
+                }
+
                 setAuthMessage(loginMessage, "Login successful. Checking agent approval status...", "info");
-                const approvalResult = await checkAgentApproval(payload.email);
-                approvalKey = approvalResult.approvalStatus;
+                const approvalResult = await checkAgentApproval(Number(agentId));
+                approvalKey = approvalResult.approved ? "true" : "false";
             }
 
             const nextPage = applyLoggedInAccess(role, approvalKey);
