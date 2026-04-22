@@ -241,7 +241,7 @@
         const welcomeUser = document.getElementById("dashboardWelcomeUser");
         const logoutButton = document.getElementById("dashboardLogoutButton");
 
-        if (role !== "admin" || approvalKey !== "approveadmin") {
+        if (role !== "admin" || approvalKey !== "true") {
             window.location.href = "../index.html";
             return false;
         }

@@ -574,6 +574,31 @@
         };
     }
 
+    async function checkAdminApproval(email) {
+        const response = await fetch(
+            "https://9rb9tzwlc0.execute-api.us-east-1.amazonaws.com/aadhi_check_admin_aproval_api_deploy/aadhi_check_admin_aproval",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email
+                })
+            }
+        );
+        const responseData = await readApiResponse(response);
+
+        if (!response.ok) {
+            throw new Error(getResponseMessage(responseData, "Unable to verify admin approval status."));
+        }
+
+        return {
+            responseData: responseData,
+            approved: responseData && responseData.approved === true
+        };
+    }
+
     function hideRoleAccessLinks() {
         agentAccessLink.classList.remove("is-visible");
         adminAccessLink.classList.remove("is-visible");
@@ -616,7 +641,7 @@
             return "pages/agent_dashboard.html";
         }
 
-        if (normalizedRole === "admin" && normalizedKey === "approveadmin") {
+        if (normalizedRole === "admin" && normalizedKey === "true") {
             adminAccessLink.classList.add("is-visible");
             return "pages/admin_dashboard.html";
         }
@@ -845,6 +870,12 @@
             if (role === "agent") {
                 setAuthMessage(loginMessage, "Login successful. Checking agent approval status...", "info");
                 const approvalResult = await checkAgentApproval(payload.email);
+                approvalKey = approvalResult.approved ? "true" : "false";
+            }
+
+            if (role === "admin") {
+                setAuthMessage(loginMessage, "Login successful. Checking admin approval status...", "info");
+                const approvalResult = await checkAdminApproval(payload.email);
                 approvalKey = approvalResult.approved ? "true" : "false";
             }
 
