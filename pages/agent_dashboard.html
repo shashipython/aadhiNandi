@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="client-update-page agent-dashboard-page">
+<header>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<main class="client-update-main agent-dashboard-main">
+    <section class="client-update-card agent-dashboard-card">
+        <div class="client-update-heading">
+            <span class="client-update-badge">Agent Dashboard</span>
+            <h1>Agent Overview</h1>
+            <p>Track introduced clients, joined clients, premium value, and total sum assured.</p>
+        </div>
+
+        <div class="agent-dashboard-grid">
+            <article class="agent-stat-card">
+                <div class="agent-stat-icon"><i class="fas fa-user-plus"></i></div>
+                <span>Clients Introduced</span>
+                <strong id="clientsIntroduced">0</strong>
+            </article>
+
+            <article class="agent-stat-card">
+                <div class="agent-stat-icon"><i class="fas fa-user-check"></i></div>
+                <span>Clients Joined</span>
+                <strong id="clientsJoined">0</strong>
+            </article>
+
+            <article class="agent-stat-card">
+                <div class="agent-stat-icon"><i class="fas fa-receipt"></i></div>
+                <span>Total Premium</span>
+                <strong id="totalPremium">Rs. 0</strong>
+            </article>
+
+            <article class="agent-stat-card">
+                <div class="agent-stat-icon"><i class="fas fa-shield-alt"></i></div>
+                <span>Total Sum Assured</span>
+                <strong id="totalSumAssured">Rs. 0</strong>
+            </article>
+        </div>
+
+        <section class="agent-dashboard-actions">
+            <div>
+                <h2>Add New Client</h2>
+                <p>Create a fresh enquiry and add it to your local dashboard summary after successful submission.</p>
+            </div>
+            <a href="agent_client.html" class="btn agent-new-client-button">
+                <i class="fas fa-plus" aria-hidden="true"></i>
+                <span>New Client</span>
+            </a>
+        </section>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <p>&copy; 2026 Secure Fund Group</p>
+        <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const dashboardDefaults = {
+        clientsIntroduced: 0,
+        clientsJoined: 0,
+        totalPremium: 0,
+        totalSumAssured: 0
+    };
+
+    function getDashboardSummary() {
+        try {
+            const storedSummary = JSON.parse(localStorage.getItem("aadhiAgentDashboardSummary") || "{}");
+
+            return Object.assign({}, dashboardDefaults, storedSummary);
+        } catch (error) {
+            return dashboardDefaults;
+        }
+    }
+
+    function formatCurrency(value) {
+        return "Rs. " + Number(value || 0).toLocaleString("en-IN", {
+            maximumFractionDigits: 0
+        });
+    }
+
+    function renderDashboard() {
+        const summary = getDashboardSummary();
+
+        document.getElementById("clientsIntroduced").textContent = summary.clientsIntroduced;
+        document.getElementById("clientsJoined").textContent = summary.clientsJoined;
+        document.getElementById("totalPremium").textContent = formatCurrency(summary.totalPremium);
+        document.getElementById("totalSumAssured").textContent = formatCurrency(summary.totalSumAssured);
+    }
+
+    renderDashboard();
+</script>
+</body>
+</html>

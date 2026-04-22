@@ -20,6 +20,13 @@
 
 <main class="client-update-main agent-client-main">
     <section class="client-update-card">
+        <div class="agent-form-toolbar">
+            <a href="agent_dashboard.html" class="client-update-reset agent-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to Agent Dashboard</span>
+            </a>
+        </div>
+
         <div class="client-update-heading">
             <span class="client-update-badge">Agent Client</span>
             <h1>Create New Enquiry</h1>
@@ -384,6 +391,35 @@
         return payload;
     }
 
+    function getDashboardSummary() {
+        try {
+            return Object.assign({
+                clientsIntroduced: 0,
+                clientsJoined: 0,
+                totalPremium: 0,
+                totalSumAssured: 0
+            }, JSON.parse(localStorage.getItem("aadhiAgentDashboardSummary") || "{}"));
+        } catch (error) {
+            return {
+                clientsIntroduced: 0,
+                clientsJoined: 0,
+                totalPremium: 0,
+                totalSumAssured: 0
+            };
+        }
+    }
+
+    function updateAgentDashboardSummary(payload) {
+        const summary = getDashboardSummary();
+
+        summary.clientsIntroduced += 1;
+        summary.clientsJoined += 1;
+        summary.totalPremium += Number(payload.total_primium || 0);
+        summary.totalSumAssured += Number(payload.total_summasured || 0);
+
+        localStorage.setItem("aadhiAgentDashboardSummary", JSON.stringify(summary));
+    }
+
     marriedField.addEventListener("change", updateMarriageDateState);
 
     agentClientForm.addEventListener("submit", async function (event) {
@@ -418,6 +454,7 @@
             }
 
             const successMessage = getResponseMessage(responseData, "Enquiry created successfully.");
+            updateAgentDashboardSummary(payload);
             preserveSuccessMessageOnReset = true;
             agentClientForm.reset();
             updateMarriageDateState();

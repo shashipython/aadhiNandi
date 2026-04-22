@@ -28,8 +28,8 @@
             <a href="pages/about.html">About</a>
             <a href="pages/services.html">Services</a>
             <a href="pages/contact.html">Contact</a>
-            <a href="pages/agent_client.html" id="agentAccessLink" class="home-outline-btn role-access-link">Agent</a>
-            <a href="pages/client_update.html" id="adminAccessLink" class="home-outline-btn role-access-link">Admin</a>
+            <a href="pages/agent_dashboard.html" id="agentAccessLink" class="home-outline-btn role-access-link">Agent</a>
+            <a href="pages/admin_dashboard.html" id="adminAccessLink" class="home-outline-btn role-access-link">Admin</a>
             <span class="home-auth-actions">
                 <button type="button" id="openSignupButton" class="home-auth-button">Signup</button>
                 <button type="button" id="openLoginButton" class="home-auth-button home-auth-button-primary">Login</button>
@@ -579,12 +579,12 @@
 
         if (normalizedRole === "agent" && normalizedKey === "true") {
             agentAccessLink.classList.add("is-visible");
-            return "pages/agent_client.html";
+            return "pages/agent_dashboard.html";
         }
 
         if (normalizedRole === "admin" && normalizedKey === "approveadmin") {
             adminAccessLink.classList.add("is-visible");
-            return "pages/client_update.html";
+            return "pages/admin_dashboard.html";
         }
 
         return "";

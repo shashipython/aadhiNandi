@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/namo-landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="client-update-page admin-dashboard-page">
+<header class="home-header">
+    <div class="home-header-inner">
+        <div class="home-brand">
+            <img src="../assets/images/NaMo logo.jpeg" alt="NaMo Logo" class="header-logo">
+            <div>
+                <p class="home-brand-label">Financial and Insurance Advisory</p>
+                <h2>Secure Fund Group</h2>
+            </div>
+        </div>
+        <nav class="home-nav">
+            <a href="../index.html"><i class="fa fa-home"></i> Home</a>
+            <a href="about.html"><i class="fa fa-info-circle"></i> About</a>
+            <a href="services.html"><i class="fa fa-briefcase"></i> Services</a>
+            <a href="contact.html"><i class="fa fa-phone"></i> Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="client-update-main admin-dashboard-main">
+    <section class="client-update-card admin-dashboard-card">
+        <div class="client-update-heading">
+            <span class="client-update-badge">Admin Dashboard</span>
+            <h1>Client Overview</h1>
+            <p>View total clients and category-wise client distribution.</p>
+        </div>
+
+        <button type="button" id="showClientCountsButton" class="admin-total-card">
+            <span>Total Number of Clients</span>
+            <strong id="adminTotalClients">0</strong>
+            <small>Click to view category details</small>
+        </button>
+
+        <section id="adminCategorySection" class="admin-category-section">
+            <div class="admin-category-heading">
+                <h2>Clients by Category</h2>
+                <p id="adminDashboardMessage" class="client-update-message info" aria-live="polite">Loading client details...</p>
+            </div>
+
+            <div class="admin-category-grid">
+                <article class="admin-category-card">
+                    <span>Aadhi Nandhi co op credit society</span>
+                    <strong data-category-count="Aadhi Nandhi co op credit society">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Shubhchintan chits pvt ltd</span>
+                    <strong data-category-count="Shubhchintan chits pvt ltd">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Mutual fund</span>
+                    <strong data-category-count="Mutual fund">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Life Insurance</span>
+                    <strong data-category-count="Life Insurance">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Generall Insurance</span>
+                    <strong data-category-count="Generall Insurance">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Health insurance</span>
+                    <strong data-category-count="Health insurance">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Group term life</span>
+                    <strong data-category-count="Group term life">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Group mediclaim plan</span>
+                    <strong data-category-count="Group mediclaim plan">0</strong>
+                </article>
+                <article class="admin-category-card">
+                    <span>Travel insurance</span>
+                    <strong data-category-count="Travel insurance">0</strong>
+                </article>
+            </div>
+        </section>
+
+        <section class="agent-dashboard-actions admin-dashboard-actions">
+            <div>
+                <h2>Enter Client Details</h2>
+                <p>Open the client management page to submit, upload, or download client records.</p>
+            </div>
+            <a href="client_update.html" class="btn agent-new-client-button">
+                <i class="fas fa-user-edit" aria-hidden="true"></i>
+                <span>Enter Client Details</span>
+            </a>
+        </section>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <p>&copy; 2026 Secure Fund Group</p>
+        <p>Email: info@cooperative.com | Phone: +91 9876543210</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const categories = [
+        "Aadhi Nandhi co op credit society",
+        "Shubhchintan chits pvt ltd",
+        "Mutual fund",
+        "Life Insurance",
+        "Generall Insurance",
+        "Health insurance",
+        "Group term life",
+        "Group mediclaim plan",
+        "Travel insurance"
+    ];
+    const totalClientsElement = document.getElementById("adminTotalClients");
+    const dashboardMessage = document.getElementById("adminDashboardMessage");
+    const categorySection = document.getElementById("adminCategorySection");
+    const showClientCountsButton = document.getElementById("showClientCountsButton");
+
+    function parseJsonSafely(value) {
+        if (typeof value !== "string") {
+            return value;
+        }
+
+        try {
+            return JSON.parse(value);
+        } catch (error) {
+            return value;
+        }
+    }
+
+    async function readApiResponse(response) {
+        const rawText = await response.text();
+        let parsedData = parseJsonSafely(rawText);
+
+        if (parsedData && typeof parsedData === "object" && Object.prototype.hasOwnProperty.call(parsedData, "body")) {
+            parsedData = parseJsonSafely(parsedData.body);
+        }
+
+        return parsedData;
+    }
+
+    function extractRows(responseData) {
+        if (Array.isArray(responseData)) {
+            return responseData;
+        }
+
+        if (responseData && typeof responseData === "object") {
+            const arrayValue = Object.values(responseData).find(function (value) {
+                return Array.isArray(value);
+            });
+
+            if (arrayValue) {
+                return arrayValue;
+            }
+
+            return [responseData];
+        }
+
+        return [];
+    }
+
+    function normalizeCategory(value) {
+        return String(value || "").trim().toLowerCase();
+    }
+
+    function setDashboardMessage(message, type) {
+        dashboardMessage.textContent = message;
+        dashboardMessage.className = "client-update-message";
+
+        if (type) {
+            dashboardMessage.classList.add(type);
+        }
+    }
+
+    function renderCounts(rows) {
+        const counts = {};
+
+        categories.forEach(function (category) {
+            counts[category] = 0;
+        });
+
+        rows.forEach(function (row) {
+            const rowCategory = normalizeCategory(row.category);
+            const matchedCategory = categories.find(function (category) {
+                return normalizeCategory(category) === rowCategory;
+            });
+
+            if (matchedCategory) {
+                counts[matchedCategory] += 1;
+            }
+        });
+
+        totalClientsElement.textContent = rows.length;
+        document.querySelectorAll("[data-category-count]").forEach(function (element) {
+            const category = element.getAttribute("data-category-count");
+            element.textContent = counts[category] || 0;
+        });
+    }
+
+    async function loadClientCounts() {
+        setDashboardMessage("Loading client details...", "info");
+
+        try {
+            const response = await fetch("https://ph34p6lq31.execute-api.us-east-1.amazonaws.com/default/aadhi_get_client_details");
+            const responseData = await readApiResponse(response);
+
+            if (!response.ok) {
+                throw new Error("Unable to fetch client details. Status: " + response.status);
+            }
+
+            const rows = extractRows(responseData);
+            renderCounts(rows);
+            setDashboardMessage("Client counts loaded successfully.", "success");
+        } catch (error) {
+            setDashboardMessage(error.message || "Something went wrong while loading client counts.", "error");
+        }
+    }
+
+    showClientCountsButton.addEventListener("click", function () {
+        categorySection.classList.toggle("is-visible");
+    });
+
+    loadClientCounts();
+</script>
+</body>
+</html>
