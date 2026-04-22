@@ -23,6 +23,10 @@
             <a href="about.html"><i class="fa fa-info-circle"></i> About</a>
             <a href="services.html"><i class="fa fa-briefcase"></i> Services</a>
             <a href="contact.html"><i class="fa fa-phone"></i> Contact</a>
+            <span id="dashboardUserActions" class="home-user-actions">
+                <span id="dashboardWelcomeUser" class="home-user-name">Welcome User</span>
+                <button type="button" id="dashboardLogoutButton" class="home-auth-button">Logout</button>
+            </span>
         </nav>
     </div>
 </header>
@@ -229,11 +233,38 @@
         }
     }
 
-    showClientCountsButton.addEventListener("click", function () {
-        categorySection.classList.toggle("is-visible");
-    });
+    function initializeDashboardAuth() {
+        const role = sessionStorage.getItem("aadhiRole");
+        const approvalKey = sessionStorage.getItem("aadhiApprovalKey");
+        const userName = sessionStorage.getItem("aadhiUserName") || "User";
+        const userActions = document.getElementById("dashboardUserActions");
+        const welcomeUser = document.getElementById("dashboardWelcomeUser");
+        const logoutButton = document.getElementById("dashboardLogoutButton");
 
-    loadClientCounts();
+        if (role !== "admin" || approvalKey !== "approveadmin") {
+            window.location.href = "../index.html";
+            return false;
+        }
+
+        userActions.classList.add("is-visible");
+        welcomeUser.textContent = "Welcome " + userName;
+        logoutButton.addEventListener("click", function () {
+            sessionStorage.removeItem("aadhiRole");
+            sessionStorage.removeItem("aadhiApprovalKey");
+            sessionStorage.removeItem("aadhiUserName");
+            window.location.href = "../index.html";
+        });
+
+        return true;
+    }
+
+    if (initializeDashboardAuth()) {
+        showClientCountsButton.addEventListener("click", function () {
+            categorySection.classList.toggle("is-visible");
+        });
+
+        loadClientCounts();
+    }
 </script>
 </body>
 </html>

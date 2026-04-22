@@ -3256,6 +3256,27 @@ body.home-page {
     margin-left: 18px;
 }
 
+.home-auth-actions.is-hidden {
+    display: none;
+}
+
+.home-user-actions {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-left: 18px;
+}
+
+.home-user-actions.is-visible {
+    display: inline-flex;
+}
+
+.home-user-name {
+    color: #ffffff;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
 .home-auth-button {
     display: inline-flex;
     align-items: center;
@@ -3633,6 +3654,12 @@ body.home-page {
     .home-auth-actions {
         margin-left: 0;
         margin-top: 12px;
+    }
+
+    .home-user-actions {
+        margin-left: 0;
+        margin-top: 12px;
+        flex-wrap: wrap;
     }
 
     .home-hero h1 {

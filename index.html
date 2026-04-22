@@ -34,6 +34,10 @@
                 <button type="button" id="openSignupButton" class="home-auth-button">Signup</button>
                 <button type="button" id="openLoginButton" class="home-auth-button home-auth-button-primary">Login</button>
             </span>
+            <span id="homeUserActions" class="home-user-actions">
+                <span id="homeWelcomeUser" class="home-user-name">Welcome User</span>
+                <button type="button" id="logoutButton" class="home-auth-button">Logout</button>
+            </span>
         </nav>
     </div>
 </header>
@@ -381,6 +385,10 @@
     const loginMessage = document.getElementById("loginMessage");
     const agentAccessLink = document.getElementById("agentAccessLink");
     const adminAccessLink = document.getElementById("adminAccessLink");
+    const homeAuthActions = document.querySelector(".home-auth-actions");
+    const homeUserActions = document.getElementById("homeUserActions");
+    const homeWelcomeUser = document.getElementById("homeWelcomeUser");
+    const logoutButton = document.getElementById("logoutButton");
 
     function openAuthModal(modal) {
         closeAuthModals();
@@ -571,6 +579,32 @@
         adminAccessLink.classList.remove("is-visible");
     }
 
+    function showLoggedOutNav() {
+        if (homeAuthActions) {
+            homeAuthActions.classList.remove("is-hidden");
+        }
+
+        if (homeUserActions) {
+            homeUserActions.classList.remove("is-visible");
+        }
+
+        hideRoleAccessLinks();
+    }
+
+    function showLoggedInNav(userName) {
+        if (homeAuthActions) {
+            homeAuthActions.classList.add("is-hidden");
+        }
+
+        if (homeUserActions) {
+            homeUserActions.classList.add("is-visible");
+        }
+
+        if (homeWelcomeUser) {
+            homeWelcomeUser.textContent = "Welcome " + (userName || "User");
+        }
+    }
+
     function applyLoggedInAccess(role, approvalKey) {
         const normalizedRole = String(role || "").toLowerCase();
         const normalizedKey = String(approvalKey || "").toLowerCase();
@@ -593,10 +627,21 @@
     function restoreSavedAccess() {
         const role = sessionStorage.getItem("aadhiRole");
         const approvalKey = sessionStorage.getItem("aadhiApprovalKey");
+        const userName = sessionStorage.getItem("aadhiUserName");
 
         if (role && approvalKey) {
             applyLoggedInAccess(role, approvalKey);
+            showLoggedInNav(userName);
+        } else {
+            showLoggedOutNav();
         }
+    }
+
+    function logoutUser() {
+        sessionStorage.removeItem("aadhiRole");
+        sessionStorage.removeItem("aadhiApprovalKey");
+        sessionStorage.removeItem("aadhiUserName");
+        showLoggedOutNav();
     }
 
     function validateSignupForm() {
@@ -675,7 +720,11 @@
         signupMessage &&
         loginMessage &&
         agentAccessLink &&
-        adminAccessLink
+        adminAccessLink &&
+        homeAuthActions &&
+        homeUserActions &&
+        homeWelcomeUser &&
+        logoutButton
     ) {
         openSignupButton.addEventListener("click", () => {
             openAuthModal(signupModal);
@@ -701,6 +750,10 @@
             if (event.key === "Escape") {
                 closeAuthModals();
             }
+        });
+
+        logoutButton.addEventListener("click", () => {
+            logoutUser();
         });
 
         signupForm.addEventListener("submit", async (event) => {
@@ -786,6 +839,8 @@
 
             const role = getResponseValue(responseData, "role").toLowerCase();
             let approvalKey = getResponseValue(responseData, "key");
+            const responseName = getResponseValue(responseData, "name");
+            const userName = responseName || payload.email.split("@")[0] || "User";
 
             if (role === "agent") {
                 setAuthMessage(loginMessage, "Login successful. Checking agent approval status...", "info");
@@ -803,6 +858,8 @@
 
             sessionStorage.setItem("aadhiRole", role);
             sessionStorage.setItem("aadhiApprovalKey", approvalKey);
+            sessionStorage.setItem("aadhiUserName", userName);
+            showLoggedInNav(userName);
             setAuthMessage(loginMessage, getResponseMessage(responseData, "Login successful. Redirecting..."), "success");
             loginForm.reset();
 
